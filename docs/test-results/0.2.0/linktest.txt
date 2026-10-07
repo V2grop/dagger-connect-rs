@@ -1,0 +1,11 @@
+
+running 6 tests
+test ipv6_bidirectional_integrity ... ok
+test ipv4_bidirectional_integrity_and_explicit_extra_port ... ok
+test rejects_implicit_peers_duplicate_ports_and_unbounded_work ... ok
+test udp_requires_a_registered_token_and_oversized_frames_are_ignored ... ok
+test selected_source_ip_is_used_for_tcp_and_udp ... ok
+test unreachable_extra_port_is_reported_as_failure ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.13s
+

@@ -1,0 +1,8 @@
+{
+  "arguments": [
+    "/root/privacy-validation/input/bin/dagger-rs"
+  ],
+  "timeout_sec": 10,
+  "expected_success": false,
+  "exit_code": 1
+}

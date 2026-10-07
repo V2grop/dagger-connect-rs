@@ -1,0 +1,12 @@
+{
+  "arguments": [
+    "/root/privacy-validation/input/bin/dagger-rs",
+    "linktest",
+    "probe",
+    "--peer",
+    "localhost:47000"
+  ],
+  "timeout_sec": 10,
+  "expected_success": false,
+  "exit_code": 2
+}

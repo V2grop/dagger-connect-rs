@@ -1,0 +1,18 @@
+Independent encrypted reverse tunnel using locally pinned peer keys
+
+Usage: dagger-rs [OPTIONS] [COMMAND]
+
+Commands:
+  linktest  Diagnose a link using only explicitly selected peers and ports
+  keygen    Generate a fresh keypair. Existing files are never replaced
+  certgen   Generate a local TLS certificate. Copy cert.pem to the client's ca_file
+  help      Print this message or the help of the given subcommand(s)
+
+Options:
+  -c, --config <CONFIG>  
+      --check            
+      --gen <GEN>        [possible values: server, client]
+  -h, --help             Print help
+  -V, --version          Print version
+
+Rust rewrite by ir_spoof: https://t.me/ir_spoof

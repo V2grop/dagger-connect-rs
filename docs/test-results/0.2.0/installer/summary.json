@@ -1,0 +1,101 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "name": "isolated-systemd-preflight",
+      "status": "passed"
+    },
+    {
+      "name": "offline-package-help-extract-install-tamper-and-one-click-menu",
+      "status": "passed",
+      "details": {
+        "run_sha256": "6c74ee57ba6ed2170cd2ae378a17696dff1438c12c3bb4585143913389ad4710",
+        "archive_sha256": "be79a62f6d01d027a6df318f4481cc7003572e01f131fa0ac3aef7ca4d8d8deb"
+      }
+    },
+    {
+      "name": "interactive-tcp-config-and-private-key-permissions",
+      "status": "passed"
+    },
+    {
+      "name": "interactive-normal-xhttp-roles-defaults-and-tls",
+      "status": "passed"
+    },
+    {
+      "name": "interactive-reverse-xhttp-roles-defaults-and-tls",
+      "status": "passed"
+    },
+    {
+      "name": "interactive-reverse-xhttps-roles-defaults-and-tls",
+      "status": "passed"
+    },
+    {
+      "name": "tcp-dedicated-user-start-forward-halfclose-restart-stop",
+      "status": "passed",
+      "details": {
+        "bytes_per_transfer": 262145,
+        "transfers": 2
+      }
+    },
+    {
+      "name": "normal-xhttp-dedicated-user-start-forward-halfclose-restart-stop",
+      "status": "passed",
+      "details": {
+        "bytes_per_transfer": 262145,
+        "transfers": 2
+      }
+    },
+    {
+      "name": "reverse-xhttp-dedicated-user-start-forward-halfclose-restart-stop",
+      "status": "passed",
+      "details": {
+        "bytes_per_transfer": 262145,
+        "transfers": 2
+      }
+    },
+    {
+      "name": "reverse-xhttps-dedicated-user-start-forward-halfclose-restart-stop",
+      "status": "passed",
+      "details": {
+        "bytes_per_transfer": 262145,
+        "transfers": 2
+      }
+    },
+    {
+      "name": "interactive-raw-tun-peer-port-address-coherence",
+      "status": "passed"
+    },
+    {
+      "name": "raw-tun-dedicated-user-capabilities-ping-restart-and-teardown",
+      "status": "passed",
+      "details": {
+        "forwarded_tcp_transfers": 0,
+        "bytes_per_transfer": 0,
+        "inner_forwarding_port": null
+      }
+    },
+    {
+      "name": "interactive-raw-tun-forwarding-peer-port-address-coherence",
+      "status": "passed"
+    },
+    {
+      "name": "raw-tun-forwarding-dedicated-user-capabilities-ping-restart-and-teardown",
+      "status": "passed",
+      "details": {
+        "forwarded_tcp_transfers": 2,
+        "bytes_per_transfer": 262145,
+        "inner_forwarding_port": 47475
+      }
+    }
+  ],
+  "binary_sha256": "d95d049b4e0b51874d874f624c0a8afbcc04424b5870d0de3cd9be8f07e994dc",
+  "script_sha256": {
+    "install.sh": "0c5e5b0f5abc253a1306cd17eb0e58570fc1c6cbb974bef0d5703ea5ffbb6ec9",
+    "setup.sh": "0f2b3f3b2eda2c8ec4096e73921b390fd1cbd9ea3a418b09bfd219171166014c",
+    "package-linux.sh": "77b3e4bb390137610c1e9ca91e88f1a92ac428d6b4760382581bfb8b98db57fa",
+    "package-selfextracting.sh": "e0f28d6a78fee71ebe1d0cb754e83449c4968dd8dc83e30266a2e51418ea58bb",
+    "offline-runner.sh.in": "7be14e9f0b4a9ec1b9bf5982e12d778c41c095ed2229ad9e620956570ac1be04"
+  },
+  "version": "dagger-rs 0.2.0",
+  "cleanup_errors": []
+}

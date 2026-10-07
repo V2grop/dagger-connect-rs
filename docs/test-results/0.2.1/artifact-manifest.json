@@ -1,0 +1,38 @@
+[
+  {
+    "name": "tests/linktest",
+    "sha256": "e3fc2879c0ba43539e9d80b737728276ca7a91432fd1ca40b025896b67091945"
+  },
+  {
+    "name": "tests/quantum",
+    "sha256": "fbc1a41cf9e1e1318ad5aa4a094de2a49c4f2416a0327db5da99393c9a4772c8"
+  },
+  {
+    "name": "tests/dagger_rs",
+    "sha256": "bea5f511534e762d644a497285924f67430dcd2d1019832e094dc10937953003"
+  },
+  {
+    "name": "tests/dagger-rs",
+    "sha256": "745f0038def98b2d090cfbe60c273d7fdd51b2293dec23a395c32efa3b23eb69"
+  },
+  {
+    "name": "tests/xhttp",
+    "sha256": "9d9c8a1b770aaf69eaf7d4d850587da7f7279efbf0a8f253c30d7f2e454aa614"
+  },
+  {
+    "name": "tests/tun_linux",
+    "sha256": "4747b05c790b18e80774ffa2f77e6e6ceaed1e05a235750b9e4845e9dc87e7d8"
+  },
+  {
+    "name": "tests/forwarding",
+    "sha256": "59f3a49effee507d7135c610dafed4579e2ed1e30da331549c31144214cde341"
+  },
+  {
+    "name": "tests/carriers",
+    "sha256": "c217051d3cf28837ca82026c769ebaeac865543f7a07be81335ddac4e79dbadf"
+  },
+  {
+    "name": "bin/dagger-rs",
+    "sha256": "fccb58880f6dfd53e74349b5780f662b3b2c9f1fea6c21d9e3c738b830457eb7"
+  }
+]

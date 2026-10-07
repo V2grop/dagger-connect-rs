@@ -1,0 +1,24 @@
+
+running 1 test
+[2m2026-10-07T14:22:41.603854Z[0m [32m INFO[0m [2mdagger_rs::engine[0m[2m:[0m tunnel listener ready [3maddress[0m[2m=[0m127.0.0.1:43293
+[2m2026-10-07T14:22:41.605331Z[0m [32m INFO[0m [2mdagger_rs::engine[0m[2m:[0m TCP map ready [3maddress[0m[2m=[0m127.0.0.1:44357
+[2m2026-10-07T14:22:41.600014Z[0m [34mDEBUG[0m [2mdagger_rs::engine[0m[2m:[0m tunnel connection failed [3maddress[0m[2m=[0m127.0.0.1:43293 [3merror[0m[2m=[0mconnect to configured peer
+[2m2026-10-07T14:22:41.607096Z[0m [32m INFO[0m [2mdagger_rs::engine[0m[2m:[0m TCP map ready [3maddress[0m[2m=[0m127.0.0.1:36431
+[2m2026-10-07T14:22:41.609660Z[0m [32m INFO[0m [2mdagger_rs::engine[0m[2m:[0m UDP map ready [3maddress[0m[2m=[0m127.0.0.1:59237
+[2m2026-10-07T14:22:41.606538Z[0m [32m INFO[0m [2mdagger_rs::engine[0m[2m:[0m SOCKS5 listener ready [3maddress[0m[2m=[0m127.0.0.1:39321
+[2m2026-10-07T14:22:41.646492Z[0m [32m INFO[0m [2mdagger_rs::engine[0m[2m:[0m authenticated tunnel connected [3maddress[0m[2m=[0m127.0.0.1:43293
+[2m2026-10-07T14:22:42.903864Z[0m [32m INFO[0m [2mdagger_rs::engine[0m[2m:[0m authenticated tunnel connected [3maddress[0m[2m=[0m127.0.0.1:43293
+[2m2026-10-07T14:22:43.563950Z[0m [34mDEBUG[0m [2mdagger_rs::engine[0m[2m:[0m forwarded stream ended [3merror[0m[2m=[0mtarget rejected: target not allowed
+[2m2026-10-07T14:22:43.583025Z[0m [34mDEBUG[0m [2mdagger_rs::engine[0m[2m:[0m tunnel connection ended [3merror[0m[2m=[0mtunnel reader closed
+[2m2026-10-07T14:22:43.587377Z[0m [34mDEBUG[0m [2mdagger_rs::engine[0m[2m:[0m tunnel connection ended [3merror[0m[2m=[0mtunnel reader closed
+[2m2026-10-07T14:22:44.075441Z[0m [32m INFO[0m [2mdagger_rs::engine[0m[2m:[0m tunnel listener ready [3maddress[0m[2m=[0m127.0.0.1:43293
+[2m2026-10-07T14:22:44.075769Z[0m [32m INFO[0m [2mdagger_rs::engine[0m[2m:[0m TCP map ready [3maddress[0m[2m=[0m127.0.0.1:44357
+[2m2026-10-07T14:22:44.075906Z[0m [32m INFO[0m [2mdagger_rs::engine[0m[2m:[0m TCP map ready [3maddress[0m[2m=[0m127.0.0.1:36431
+[2m2026-10-07T14:22:44.076161Z[0m [32m INFO[0m [2mdagger_rs::engine[0m[2m:[0m UDP map ready [3maddress[0m[2m=[0m127.0.0.1:59237
+[2m2026-10-07T14:22:44.078783Z[0m [32m INFO[0m [2mdagger_rs::engine[0m[2m:[0m SOCKS5 listener ready [3maddress[0m[2m=[0m127.0.0.1:39321
+[2m2026-10-07T14:22:44.615998Z[0m [32m INFO[0m [2mdagger_rs::engine[0m[2m:[0m authenticated tunnel connected [3maddress[0m[2m=[0m127.0.0.1:43293
+[2m2026-10-07T14:22:44.641121Z[0m [34mDEBUG[0m [2mdagger_rs::engine[0m[2m:[0m tunnel session closed [3merror[0m[2m=[0mtunnel reader closed
+test tcp_udp_socks_allowlist_and_reconnect ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 3.21s
+

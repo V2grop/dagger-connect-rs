@@ -1,0 +1,19 @@
+
+running 4 tests
+test one_network_peer_can_reconnect_without_evicting_an_existing_conversation ... ok
+adaptive server echoed round 0
+test quantum_plus_knock_connects_and_listener_drop_releases_both_ports ... ok
+adaptive client received round 0
+test quantum_plus_transfers_with_one_lost_data_shard_per_block ... ok
+2026-10-07T12:59:12.176071Z DEBUG dagger_rs::quantum_carrier::tuning: quantum adaptive tuning window=512 buffer=4194304 rtt_ms=23.514098971200436
+2026-10-07T12:59:12.196474Z DEBUG dagger_rs::quantum_carrier::tuning: quantum adaptive tuning window=512 buffer=4194304 rtt_ms=7.717749592567405
+adaptive server echoed round 1
+adaptive client received round 1
+adaptive server echoed round 2
+adaptive client received round 2
+adaptive server echoed round 3
+adaptive client received round 3
+test explicit_adaptive_tuning_keeps_a_live_udp_stream_usable_across_timer_updates ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 5.36s
+

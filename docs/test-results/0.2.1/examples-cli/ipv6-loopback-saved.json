@@ -1,0 +1,65 @@
+{
+  "peer": "[::1]:52067",
+  "reverse_listener": "[::1]:39755",
+  "tcp": {
+    "ok": true,
+    "round_trips": 1,
+    "rtt_ms": 3.0656,
+    "error": null
+  },
+  "udp": {
+    "sent": 4,
+    "received": 4,
+    "loss_percent": 0.0,
+    "integrity": true,
+    "rtt_ms": 1.4973249999999998,
+    "error": null
+  },
+  "reverse_tcp": {
+    "ok": true,
+    "round_trips": 1,
+    "rtt_ms": 4.47,
+    "error": null
+  },
+  "reverse_udp": {
+    "sent": 4,
+    "received": 4,
+    "loss_percent": 0.0,
+    "integrity": true,
+    "rtt_ms": 0.685,
+    "error": null
+  },
+  "upload": {
+    "bytes": 6356992,
+    "seconds": 0.1112914,
+    "mbps": 456.9619575277156,
+    "integrity": true,
+    "error": null
+  },
+  "download": {
+    "bytes": 4096000,
+    "seconds": 0.0855524,
+    "mbps": 383.0167242532062,
+    "integrity": true,
+    "error": null
+  },
+  "ports": [
+    {
+      "port": 42683,
+      "tcp": {
+        "ok": true,
+        "round_trips": 1,
+        "rtt_ms": 3.7603,
+        "error": null
+      },
+      "udp": {
+        "sent": 4,
+        "received": 4,
+        "loss_percent": 0.0,
+        "integrity": true,
+        "rtt_ms": 0.9755499999999999,
+        "error": null
+      }
+    }
+  ]
+}

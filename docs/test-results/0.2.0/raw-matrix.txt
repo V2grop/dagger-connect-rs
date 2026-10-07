@@ -1,0 +1,217 @@
+tun-tcp-plain-ip4: actual outer source/destination, protocol, TOS/DF and carrier marker verified in both directions
+tun-tcp-plain-ip4: ICMP and 16 UDP datagrams passed without injected loss
+tun-tcp-plain-ip4: 262145-byte TCP half-close passed
+tun-tcp-plain-ip4: injected-loss queue statistics
+qdisc netem 800a: root refcnt 3 limit 1000 loss 2%
+ Sent 318066 bytes 541 pkt (dropped 11, overlimits 0 requeues 0) 
+ backlog 0b 0p requeues 0
+tun-tcp-plain-ip4: server reconnect and interface teardown passed
+tun-tcp-plain-ip6: actual outer source/destination, protocol, TOS/DF and carrier marker verified in both directions
+tun-tcp-plain-ip6: ICMP and 16 UDP datagrams passed without injected loss
+tun-tcp-plain-ip6: 262145-byte TCP half-close passed
+tun-tcp-plain-ip6: injected-loss queue statistics
+qdisc netem 800b: root refcnt 3 limit 1000 loss 2%
+ Sent 326025 bytes 568 pkt (dropped 14, overlimits 0 requeues 0) 
+ backlog 0b 0p requeues 0
+tun-tcp-plain-ip6: server reconnect and interface teardown passed
+tun-udp-plain-ip4: actual outer source/destination, protocol, TOS/DF and carrier marker verified in both directions
+tun-udp-plain-ip4: ICMP and 16 UDP datagrams passed without injected loss
+tun-udp-plain-ip4: 262145-byte TCP half-close passed
+tun-udp-plain-ip4: server reconnect and interface teardown passed
+tun-udp-plain-ip6: actual outer source/destination, protocol, TOS/DF and carrier marker verified in both directions
+tun-udp-plain-ip6: ICMP and 16 UDP datagrams passed without injected loss
+tun-udp-plain-ip6: 262145-byte TCP half-close passed
+tun-udp-plain-ip6: server reconnect and interface teardown passed
+tun-icmp-plain-ip4: actual outer source/destination, protocol, TOS/DF and carrier marker verified in both directions
+tun-icmp-plain-ip4: ICMP and 16 UDP datagrams passed without injected loss
+tun-icmp-plain-ip4: 262145-byte TCP half-close passed
+tun-icmp-plain-ip4: server reconnect and interface teardown passed
+tun-icmp-plain-ip6: actual outer source/destination, protocol, TOS/DF and carrier marker verified in both directions
+tun-icmp-plain-ip6: ICMP and 16 UDP datagrams passed without injected loss
+tun-icmp-plain-ip6: 262145-byte TCP half-close passed
+tun-icmp-plain-ip6: server reconnect and interface teardown passed
+tun-gre-plain-ip4: actual outer source/destination, protocol, TOS/DF and carrier marker verified in both directions
+tun-gre-plain-ip4: ICMP and 16 UDP datagrams passed without injected loss
+tun-gre-plain-ip4: 262145-byte TCP half-close passed
+tun-gre-plain-ip4: server reconnect and interface teardown passed
+tun-gre-plain-ip6: actual outer source/destination, protocol, TOS/DF and carrier marker verified in both directions
+tun-gre-plain-ip6: ICMP and 16 UDP datagrams passed without injected loss
+tun-gre-plain-ip6: 262145-byte TCP half-close passed
+tun-gre-plain-ip6: server reconnect and interface teardown passed
+tun-ipip-plain-ip4: actual outer source/destination, protocol, TOS/DF and carrier marker verified in both directions
+tun-ipip-plain-ip4: ICMP and 16 UDP datagrams passed without injected loss
+tun-ipip-plain-ip4: 262145-byte TCP half-close passed
+tun-ipip-plain-ip4: server reconnect and interface teardown passed
+tun-ipip-plain-ip6: actual outer source/destination, protocol, TOS/DF and carrier marker verified in both directions
+tun-ipip-plain-ip6: ICMP and 16 UDP datagrams passed without injected loss
+tun-ipip-plain-ip6: 262145-byte TCP half-close passed
+tun-ipip-plain-ip6: server reconnect and interface teardown passed
+tun-bip-plain-ip4: actual outer source/destination, protocol, TOS/DF and carrier marker verified in both directions
+tun-bip-plain-ip4: ICMP and 16 UDP datagrams passed without injected loss
+tun-bip-plain-ip4: 262145-byte TCP half-close passed
+tun-bip-plain-ip4: server reconnect and interface teardown passed
+tun-bip-plain-ip6: actual outer source/destination, protocol, TOS/DF and carrier marker verified in both directions
+tun-bip-plain-ip6: ICMP and 16 UDP datagrams passed without injected loss
+tun-bip-plain-ip6: 262145-byte TCP half-close passed
+tun-bip-plain-ip6: server reconnect and interface teardown passed
+tun-raw-plain-ip4: actual outer source/destination, protocol, TOS/DF and carrier marker verified in both directions
+tun-raw-plain-ip4: ICMP and 16 UDP datagrams passed without injected loss
+tun-raw-plain-ip4: 262145-byte TCP half-close passed
+tun-raw-plain-ip4: server reconnect and interface teardown passed
+tun-raw-plain-ip6: actual outer source/destination, protocol, TOS/DF and carrier marker verified in both directions
+tun-raw-plain-ip6: ICMP and 16 UDP datagrams passed without injected loss
+tun-raw-plain-ip6: 262145-byte TCP half-close passed
+tun-raw-plain-ip6: server reconnect and interface teardown passed
+tun-tcp-dcpi-ip4: actual outer source/destination, protocol, TOS/DF and carrier marker verified in both directions
+tun-tcp-dcpi-ip4: ICMP and 16 UDP datagrams passed without injected loss
+tun-tcp-dcpi-ip4: 262145-byte TCP half-close passed
+tun-tcp-dcpi-ip4: server reconnect and interface teardown passed
+tun-tcp-dcpi-ip6: actual outer source/destination, protocol, TOS/DF and carrier marker verified in both directions
+tun-tcp-dcpi-ip6: ICMP and 16 UDP datagrams passed without injected loss
+tun-tcp-dcpi-ip6: 262145-byte TCP half-close passed
+tun-tcp-dcpi-ip6: server reconnect and interface teardown passed
+tun-tcp-spoof-src-ip4: actual outer source/destination, protocol, TOS/DF and carrier marker verified in both directions
+tun-tcp-spoof-src-ip4: ICMP and 16 UDP datagrams passed without injected loss
+tun-tcp-spoof-src-ip4: 262145-byte TCP half-close passed
+tun-tcp-spoof-src-ip4: server reconnect and interface teardown passed
+tun-tcp-spoof-src-ip6: actual outer source/destination, protocol, TOS/DF and carrier marker verified in both directions
+tun-tcp-spoof-src-ip6: ICMP and 16 UDP datagrams passed without injected loss
+tun-tcp-spoof-src-ip6: 262145-byte TCP half-close passed
+tun-tcp-spoof-src-ip6: server reconnect and interface teardown passed
+tun-tcp-spoof-dst-ip4: actual outer source/destination, protocol, TOS/DF and carrier marker verified in both directions
+tun-tcp-spoof-dst-ip4: ICMP and 16 UDP datagrams passed without injected loss
+tun-tcp-spoof-dst-ip4: 262145-byte TCP half-close passed
+tun-tcp-spoof-dst-ip4: server reconnect and interface teardown passed
+tun-tcp-spoof-dst-ip6: actual outer source/destination, protocol, TOS/DF and carrier marker verified in both directions
+tun-tcp-spoof-dst-ip6: ICMP and 16 UDP datagrams passed without injected loss
+tun-tcp-spoof-dst-ip6: 262145-byte TCP half-close passed
+tun-tcp-spoof-dst-ip6: server reconnect and interface teardown passed
+tun-tcp-spoof-both-ip4: actual outer source/destination, protocol, TOS/DF and carrier marker verified in both directions
+tun-tcp-spoof-both-ip4: ICMP and 16 UDP datagrams passed without injected loss
+tun-tcp-spoof-both-ip4: 262145-byte TCP half-close passed
+tun-tcp-spoof-both-ip4: server reconnect and interface teardown passed
+tun-tcp-spoof-both-ip6: actual outer source/destination, protocol, TOS/DF and carrier marker verified in both directions
+tun-tcp-spoof-both-ip6: ICMP and 16 UDP datagrams passed without injected loss
+tun-tcp-spoof-both-ip6: 262145-byte TCP half-close passed
+tun-tcp-spoof-both-ip6: server reconnect and interface teardown passed
+tun-tcp-arp-ip4: actual outer source/destination, protocol, TOS/DF and carrier marker verified in both directions
+tun-tcp-arp-ip4: ICMP and 16 UDP datagrams passed without injected loss
+tun-tcp-arp-ip4: 262145-byte TCP half-close passed
+tun-tcp-arp-ip4: server reconnect and interface teardown passed
+tun-tcp-arp-ip6: actual outer source/destination, protocol, TOS/DF and carrier marker verified in both directions
+tun-tcp-arp-ip6: ICMP and 16 UDP datagrams passed without injected loss
+tun-tcp-arp-ip6: 262145-byte TCP half-close passed
+tun-tcp-arp-ip6: server reconnect and interface teardown passed
+quantum-tcp-plain-ip4: actual outer source/destination, protocol, TOS/DF and carrier marker verified in both directions
+quantum-tcp-plain-ip4: ICMP and 16 UDP datagrams passed without injected loss
+quantum-tcp-plain-ip4: 262145-byte TCP half-close passed
+quantum-tcp-plain-ip4: injected-loss queue statistics
+qdisc netem 800c: root refcnt 3 limit 1000 loss 2%
+ Sent 598610 bytes 1547 pkt (dropped 34, overlimits 0 requeues 0) 
+ backlog 0b 0p requeues 0
+quantum-tcp-plain-ip4: server reconnect and interface teardown passed
+quantum-tcp-plain-ip6: actual outer source/destination, protocol, TOS/DF and carrier marker verified in both directions
+quantum-tcp-plain-ip6: ICMP and 16 UDP datagrams passed without injected loss
+quantum-tcp-plain-ip6: 262145-byte TCP half-close passed
+quantum-tcp-plain-ip6: injected-loss queue statistics
+qdisc netem 800d: root refcnt 3 limit 1000 loss 2%
+ Sent 669737 bytes 1848 pkt (dropped 38, overlimits 0 requeues 0) 
+ backlog 0b 0p requeues 0
+quantum-tcp-plain-ip6: server reconnect and interface teardown passed
+quantum-udp-plain-ip4: actual outer source/destination, protocol, TOS/DF and carrier marker verified in both directions
+quantum-udp-plain-ip4: ICMP and 16 UDP datagrams passed without injected loss
+quantum-udp-plain-ip4: 262145-byte TCP half-close passed
+quantum-udp-plain-ip4: server reconnect and interface teardown passed
+quantum-udp-plain-ip6: actual outer source/destination, protocol, TOS/DF and carrier marker verified in both directions
+quantum-udp-plain-ip6: ICMP and 16 UDP datagrams passed without injected loss
+quantum-udp-plain-ip6: 262145-byte TCP half-close passed
+quantum-udp-plain-ip6: server reconnect and interface teardown passed
+quantum-icmp-plain-ip4: actual outer source/destination, protocol, TOS/DF and carrier marker verified in both directions
+quantum-icmp-plain-ip4: ICMP and 16 UDP datagrams passed without injected loss
+quantum-icmp-plain-ip4: 262145-byte TCP half-close passed
+quantum-icmp-plain-ip4: server reconnect and interface teardown passed
+quantum-icmp-plain-ip6: actual outer source/destination, protocol, TOS/DF and carrier marker verified in both directions
+quantum-icmp-plain-ip6: ICMP and 16 UDP datagrams passed without injected loss
+quantum-icmp-plain-ip6: 262145-byte TCP half-close passed
+quantum-icmp-plain-ip6: server reconnect and interface teardown passed
+quantum-gre-plain-ip4: actual outer source/destination, protocol, TOS/DF and carrier marker verified in both directions
+quantum-gre-plain-ip4: ICMP and 16 UDP datagrams passed without injected loss
+quantum-gre-plain-ip4: 262145-byte TCP half-close passed
+quantum-gre-plain-ip4: server reconnect and interface teardown passed
+quantum-gre-plain-ip6: actual outer source/destination, protocol, TOS/DF and carrier marker verified in both directions
+quantum-gre-plain-ip6: ICMP and 16 UDP datagrams passed without injected loss
+quantum-gre-plain-ip6: 262145-byte TCP half-close passed
+quantum-gre-plain-ip6: server reconnect and interface teardown passed
+quantum-ipip-plain-ip4: actual outer source/destination, protocol, TOS/DF and carrier marker verified in both directions
+quantum-ipip-plain-ip4: ICMP and 16 UDP datagrams passed without injected loss
+quantum-ipip-plain-ip4: 262145-byte TCP half-close passed
+quantum-ipip-plain-ip4: server reconnect and interface teardown passed
+quantum-ipip-plain-ip6: actual outer source/destination, protocol, TOS/DF and carrier marker verified in both directions
+quantum-ipip-plain-ip6: ICMP and 16 UDP datagrams passed without injected loss
+quantum-ipip-plain-ip6: 262145-byte TCP half-close passed
+quantum-ipip-plain-ip6: server reconnect and interface teardown passed
+quantum-bip-plain-ip4: actual outer source/destination, protocol, TOS/DF and carrier marker verified in both directions
+quantum-bip-plain-ip4: ICMP and 16 UDP datagrams passed without injected loss
+quantum-bip-plain-ip4: 262145-byte TCP half-close passed
+quantum-bip-plain-ip4: server reconnect and interface teardown passed
+quantum-bip-plain-ip6: actual outer source/destination, protocol, TOS/DF and carrier marker verified in both directions
+quantum-bip-plain-ip6: ICMP and 16 UDP datagrams passed without injected loss
+quantum-bip-plain-ip6: 262145-byte TCP half-close passed
+quantum-bip-plain-ip6: server reconnect and interface teardown passed
+quantum-raw-plain-ip4: actual outer source/destination, protocol, TOS/DF and carrier marker verified in both directions
+quantum-raw-plain-ip4: ICMP and 16 UDP datagrams passed without injected loss
+quantum-raw-plain-ip4: 262145-byte TCP half-close passed
+quantum-raw-plain-ip4: server reconnect and interface teardown passed
+quantum-raw-plain-ip6: actual outer source/destination, protocol, TOS/DF and carrier marker verified in both directions
+quantum-raw-plain-ip6: ICMP and 16 UDP datagrams passed without injected loss
+quantum-raw-plain-ip6: 262145-byte TCP half-close passed
+quantum-raw-plain-ip6: server reconnect and interface teardown passed
+quantum-tcp-dcpi-ip4: actual outer source/destination, protocol, TOS/DF and carrier marker verified in both directions
+quantum-tcp-dcpi-ip4: ICMP and 16 UDP datagrams passed without injected loss
+quantum-tcp-dcpi-ip4: 262145-byte TCP half-close passed
+quantum-tcp-dcpi-ip4: server reconnect and interface teardown passed
+quantum-tcp-dcpi-ip6: actual outer source/destination, protocol, TOS/DF and carrier marker verified in both directions
+quantum-tcp-dcpi-ip6: ICMP and 16 UDP datagrams passed without injected loss
+quantum-tcp-dcpi-ip6: 262145-byte TCP half-close passed
+quantum-tcp-dcpi-ip6: server reconnect and interface teardown passed
+quantum-tcp-spoof-src-ip4: actual outer source/destination, protocol, TOS/DF and carrier marker verified in both directions
+quantum-tcp-spoof-src-ip4: ICMP and 16 UDP datagrams passed without injected loss
+quantum-tcp-spoof-src-ip4: 262145-byte TCP half-close passed
+quantum-tcp-spoof-src-ip4: server reconnect and interface teardown passed
+quantum-tcp-spoof-src-ip6: actual outer source/destination, protocol, TOS/DF and carrier marker verified in both directions
+quantum-tcp-spoof-src-ip6: ICMP and 16 UDP datagrams passed without injected loss
+quantum-tcp-spoof-src-ip6: 262145-byte TCP half-close passed
+quantum-tcp-spoof-src-ip6: server reconnect and interface teardown passed
+quantum-tcp-spoof-dst-ip4: actual outer source/destination, protocol, TOS/DF and carrier marker verified in both directions
+quantum-tcp-spoof-dst-ip4: ICMP and 16 UDP datagrams passed without injected loss
+quantum-tcp-spoof-dst-ip4: 262145-byte TCP half-close passed
+quantum-tcp-spoof-dst-ip4: server reconnect and interface teardown passed
+quantum-tcp-spoof-dst-ip6: actual outer source/destination, protocol, TOS/DF and carrier marker verified in both directions
+quantum-tcp-spoof-dst-ip6: ICMP and 16 UDP datagrams passed without injected loss
+quantum-tcp-spoof-dst-ip6: 262145-byte TCP half-close passed
+quantum-tcp-spoof-dst-ip6: server reconnect and interface teardown passed
+quantum-tcp-spoof-both-ip4: actual outer source/destination, protocol, TOS/DF and carrier marker verified in both directions
+quantum-tcp-spoof-both-ip4: ICMP and 16 UDP datagrams passed without injected loss
+quantum-tcp-spoof-both-ip4: 262145-byte TCP half-close passed
+quantum-tcp-spoof-both-ip4: server reconnect and interface teardown passed
+quantum-tcp-spoof-both-ip6: actual outer source/destination, protocol, TOS/DF and carrier marker verified in both directions
+quantum-tcp-spoof-both-ip6: ICMP and 16 UDP datagrams passed without injected loss
+quantum-tcp-spoof-both-ip6: 262145-byte TCP half-close passed
+quantum-tcp-spoof-both-ip6: server reconnect and interface teardown passed
+quantum-gaming-tcp-plain-ip4: actual outer source/destination, protocol, TOS/DF and carrier marker verified in both directions
+quantum-gaming-tcp-plain-ip4: ICMP and 16 UDP datagrams passed without injected loss
+quantum-gaming-tcp-plain-ip4: 262145-byte TCP half-close passed
+quantum-gaming-tcp-plain-ip4: injected-loss queue statistics
+qdisc netem 800e: root refcnt 3 limit 1000 loss 2%
+ Sent 764958 bytes 2315 pkt (dropped 51, overlimits 0 requeues 0) 
+ backlog 0b 0p requeues 0
+quantum-gaming-tcp-plain-ip4: server reconnect and interface teardown passed
+quantum-gaming-tcp-plain-ip6: actual outer source/destination, protocol, TOS/DF and carrier marker verified in both directions
+quantum-gaming-tcp-plain-ip6: ICMP and 16 UDP datagrams passed without injected loss
+quantum-gaming-tcp-plain-ip6: 262145-byte TCP half-close passed
+quantum-gaming-tcp-plain-ip6: injected-loss queue statistics
+qdisc netem 800f: root refcnt 3 limit 1000 loss 2%
+ Sent 960596 bytes 2891 pkt (dropped 69, overlimits 0 requeues 0) 
+ backlog 0b 0p requeues 0
+quantum-gaming-tcp-plain-ip6: server reconnect and interface teardown passed
+Raw all matrix passed (48 family-specific runs)

@@ -1,0 +1,40 @@
+{
+  "_comment": "Dagger Rust rewrite by ir_spoof; https://t.me/ir_spoof; credit: i\u200br\u2060_\u200bs\u2060p\u200bo\u2060o\u200bf",
+  "mode": "server",
+  "private_key_file": "/tmp/dagger-examples-cli-v2dg0_sf/keys/server/private.key",
+  "peer_public_keys": [
+    "0c75c80217d2095e516d1ba1a60b8468a294ec072a4f411399f03f85101ea51e"
+  ],
+  "tun": {
+    "name": "dagger0",
+    "address": "10.77.0.1",
+    "peer_address": "10.77.0.2",
+    "mtu": 1380,
+    "forwarding_port": 47475
+  },
+  "socks5": "127.0.0.1:1080",
+  "listeners": [
+    {
+      "addr": "192.0.2.1:443",
+      "transport": "tun",
+      "raw": {
+        "profile": "tcp",
+        "local_ip": "192.0.2.1",
+        "peer_ip": "192.0.2.2",
+        "l4_port": 443
+      },
+      "maps": [
+        {
+          "type": "tcp",
+          "bind": "127.0.0.1:18080",
+          "target": "127.0.0.1:8080"
+        },
+        {
+          "type": "udp",
+          "bind": "127.0.0.1:15353",
+          "target": "127.0.0.1:5353"
+        }
+      ]
+    }
+  ]
+}

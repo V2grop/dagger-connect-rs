@@ -1,0 +1,26 @@
+{
+  "_comment": "Dagger Rust rewrite by ir_spoof; https://t.me/ir_spoof; credit: i\u200br\u2060_\u200bs\u2060p\u200bo\u2060o\u200bf",
+  "mode": "client",
+  "private_key_file": "/tmp/dagger-examples-cli-v2dg0_sf/keys/client/private.key",
+  "tun": {
+    "name": "dagger0",
+    "address": "10.77.0.2",
+    "peer_address": "10.77.0.1",
+    "mtu": 1380
+  },
+  "paths": [
+    {
+      "addr": "192.0.2.1:443",
+      "transport": "quantum",
+      "raw": {
+        "profile": "tcp",
+        "local_ip": "192.0.2.2",
+        "peer_ip": "192.0.2.1",
+        "l4_port": 443,
+        "dcpi_mode": false
+      },
+      "server_public_key": "0c756e1c684c294a51a305adb72b6b01d882d1519e2e8decdb7180701d2b5961",
+      "connection_pool": 1
+    }
+  ]
+}

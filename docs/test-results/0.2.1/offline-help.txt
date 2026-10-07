@@ -1,0 +1,3 @@
+Usage: sudo bash dagger-rs-linux.run [--prefix /usr/local] [--config-dir /etc/dagger-rs] [--no-setup]
+       bash dagger-rs-linux.run --extract NEW_DIRECTORY
+Installs the embedded local binary and opens the setup/service menu. No downloads.

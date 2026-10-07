@@ -1,0 +1,19 @@
+{
+  "arguments": [
+    "/root/privacy-validation/input/bin/dagger-rs",
+    "certgen",
+    "--out",
+    "/tmp/dagger-examples-cli-v2dg0_sf/tls",
+    "--name",
+    "127.0.0.1",
+    "--name",
+    "::1",
+    "--name",
+    "localhost",
+    "--name",
+    "tunnel.example.com"
+  ],
+  "timeout_sec": 30,
+  "expected_success": true,
+  "exit_code": 0
+}

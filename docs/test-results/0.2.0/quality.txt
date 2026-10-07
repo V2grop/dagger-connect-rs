@@ -1,0 +1,3 @@
+Final fixture formatting and warnings-denied Linux Clippy passed
+    Checking dagger-rs v0.2.0 (/root/dagger-final-source)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 9.12s

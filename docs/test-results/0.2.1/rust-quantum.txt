@@ -1,0 +1,19 @@
+
+running 4 tests
+test one_network_peer_can_reconnect_without_evicting_an_existing_conversation ... ok
+test quantum_plus_knock_connects_and_listener_drop_releases_both_ports ... ok
+[2m2026-10-07T14:22:47.940035Z[0m [34mDEBUG[0m [2mdagger_rs::quantum_carrier::tuning[0m[2m:[0m quantum adaptive tuning [3mwindow[0m[2m=[0m512 [3mbuffer[0m[2m=[0m4194304 [3mrtt_ms[0m[2m=[0m22.25367526182169
+[2m2026-10-07T14:22:47.956791Z[0m [34mDEBUG[0m [2mdagger_rs::quantum_carrier::tuning[0m[2m:[0m quantum adaptive tuning [3mwindow[0m[2m=[0m512 [3mbuffer[0m[2m=[0m4194304 [3mrtt_ms[0m[2m=[0m9.689783180247812
+test explicit_adaptive_tuning_keeps_a_live_udp_stream_usable_across_timer_updates ... ok
+test quantum_plus_transfers_with_one_lost_data_shard_per_block ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 6.72s
+
+adaptive server echoed round 0
+adaptive client received round 0
+adaptive server echoed round 1
+adaptive client received round 1
+adaptive server echoed round 2
+adaptive client received round 2
+adaptive server echoed round 3
+adaptive client received round 3

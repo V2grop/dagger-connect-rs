@@ -1,0 +1,10 @@
+{
+  "arguments": [
+    "/root/privacy-validation/input/bin/dagger-rs",
+    "--gen",
+    "unsupported"
+  ],
+  "timeout_sec": 10,
+  "expected_success": false,
+  "exit_code": 2
+}

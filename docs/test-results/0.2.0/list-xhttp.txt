@@ -1,0 +1,6 @@
+auto_falls_back_through_buffering_http_proxy_in_both_directions: test
+auto_uses_streaming_when_origin_accepts_unfinished_upload: test
+packet_up_plain_and_tls_keep_logical_roles_in_both_directions: test
+reversed_http_connections_still_require_logical_pinned_identities: test
+
+4 tests, 0 benchmarks

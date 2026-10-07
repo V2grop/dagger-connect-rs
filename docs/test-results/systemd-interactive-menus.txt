@@ -1,0 +1,142 @@
+
+Dagger Rust — local Linux setup
+Config directory: /etc/dagger-menu-final
+1) Generate/show local public key
+2) Configure server or client
+3) Validate configuration
+4) Run in foreground
+5) Install and start systemd service
+6) Service status
+7) Restart service
+8) Stop service
+9) Recent logs
+10) Generate local TLS certificate
+0) Exit
+Private key saved to /etc/dagger-menu-final/server-keys/private.key
+[test public key omitted]
+[test public key omitted]
+
+Exchange only public keys with the other machine. Private keys remain on their own machine.
+Independent transport carriers (no interoperability with the original paid core):
+TUN manages only its local interface and peer route. Additional forwarding/NAT must be configured explicitly.
+Configuration and private key are valid.
+Saved /etc/dagger-menu-final/server.json. Edit JSON to add more mappings, listeners, or paths.
+
+Dagger Rust — local Linux setup
+Config directory: /etc/dagger-menu-final
+1) Generate/show local public key
+2) Configure server or client
+3) Validate configuration
+4) Run in foreground
+5) Install and start systemd service
+6) Service status
+7) Restart service
+8) Stop service
+9) Recent logs
+10) Generate local TLS certificate
+0) Exit
+
+Dagger Rust — local Linux setup
+Config directory: /etc/dagger-menu-final
+1) Generate/show local public key
+2) Configure server or client
+3) Validate configuration
+4) Run in foreground
+5) Install and start systemd service
+6) Service status
+7) Restart service
+8) Stop service
+9) Recent logs
+10) Generate local TLS certificate
+0) Exit
+Private key saved to /etc/dagger-menu-final/client-keys/private.key
+[test public key omitted]
+[test public key omitted]
+
+Exchange only public keys with the other machine. Private keys remain on their own machine.
+Independent transport carriers (no interoperability with the original paid core):
+Configuration and private key are valid.
+Saved /etc/dagger-menu-final/client.json. Edit JSON to add more mappings, listeners, or paths.
+
+Dagger Rust — local Linux setup
+Config directory: /etc/dagger-menu-final
+1) Generate/show local public key
+2) Configure server or client
+3) Validate configuration
+4) Run in foreground
+5) Install and start systemd service
+6) Service status
+7) Restart service
+8) Stop service
+9) Recent logs
+10) Generate local TLS certificate
+0) Exit
+INTERACTIVE_TUN_AND_WS_CONFIG_PASS
+
+Dagger Rust — local Linux setup
+Config directory: /etc/dagger-menu-final
+1) Generate/show local public key
+2) Configure server or client
+3) Validate configuration
+4) Run in foreground
+5) Install and start systemd service
+6) Service status
+7) Restart service
+8) Stop service
+9) Recent logs
+10) Generate local TLS certificate
+0) Exit
+Certificate saved to /etc/dagger-menu-final/server-tls/cert.pem
+TLS private key saved to /etc/dagger-menu-final/server-tls/key.pem
+Server certificate: /etc/dagger-menu-final/server-tls/cert.pem
+Copy cert.pem to the client for trust configuration. Keep key.pem on the server.
+
+Dagger Rust — local Linux setup
+Config directory: /etc/dagger-menu-final
+1) Generate/show local public key
+2) Configure server or client
+3) Validate configuration
+4) Run in foreground
+5) Install and start systemd service
+6) Service status
+7) Restart service
+8) Stop service
+9) Recent logs
+10) Generate local TLS certificate
+0) Exit
+
+Dagger Rust — local Linux setup
+Config directory: /etc/dagger-menu-final
+1) Generate/show local public key
+2) Configure server or client
+3) Validate configuration
+4) Run in foreground
+5) Install and start systemd service
+6) Service status
+7) Restart service
+8) Stop service
+9) Recent logs
+10) Generate local TLS certificate
+0) Exit
+Using existing server keypair.
+[test public key omitted]
+
+Exchange only public keys with the other machine. Private keys remain on their own machine.
+Independent transport carriers (no interoperability with the original paid core):
+Configuration and private key are valid.
+Saved /etc/dagger-menu-final/server.json. Edit JSON to add more mappings, listeners, or paths.
+
+Dagger Rust — local Linux setup
+Config directory: /etc/dagger-menu-final
+1) Generate/show local public key
+2) Configure server or client
+3) Validate configuration
+4) Run in foreground
+5) Install and start systemd service
+6) Service status
+7) Restart service
+8) Stop service
+9) Recent logs
+10) Generate local TLS certificate
+0) Exit
+INTERACTIVE_CERTIFICATE_TLS_CONFIG_BACKUP_PASS

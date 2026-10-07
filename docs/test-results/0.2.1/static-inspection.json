@@ -1,0 +1,148 @@
+{
+  "scope": "Independent static inspection of the freshly compiled Linux release. Header/segment/symbol checks establish observed layout, not overall security or external CDN compatibility.",
+  "parser": "LIEF 1.0.0-d05b3499b",
+  "binary": {
+    "path": "work/dagger-target/x86_64-unknown-linux-musl/release/dagger-rs",
+    "bytes": 7712936,
+    "sha256": "fccb58880f6dfd53e74349b5780f662b3b2c9f1fea6c21d9e3c738b830457eb7",
+    "expected_sha256": "fccb58880f6dfd53e74349b5780f662b3b2c9f1fea6c21d9e3c738b830457eb7",
+    "expected_hash_matches": true,
+    "elf": {
+      "class": "ELF64",
+      "endianness": "LSB",
+      "machine": "X86_64",
+      "type": "DYN",
+      "entry": "0x1d0740",
+      "entry_in_executable_load": true,
+      "static_pie": true,
+      "interpreter_count": 0,
+      "dt_needed_count": 0,
+      "shared_library_dependencies": [],
+      "gnu_stack_present": true,
+      "gnu_stack_executable": false,
+      "gnu_relro_present": true,
+      "bind_now": true,
+      "writable_executable_loads": [],
+      "debug_sections": [],
+      "full_symbol_tables": [],
+      "named_dynamic_symbols": [],
+      "stripped_debug_and_full_symbols": true,
+      "load_segments": [
+        {
+          "virtual_address": "0x0",
+          "file_offset": 0,
+          "file_size": 1898276,
+          "memory_size": 1898276,
+          "flags": 4
+        },
+        {
+          "virtual_address": "0x1d0740",
+          "file_offset": 1898304,
+          "file_size": 5629054,
+          "memory_size": 5629054,
+          "flags": 5
+        },
+        {
+          "virtual_address": "0x72fbc0",
+          "file_offset": 7527360,
+          "file_size": 177792,
+          "memory_size": 181312,
+          "flags": 6
+        },
+        {
+          "virtual_address": "0x75c240",
+          "file_offset": 7705152,
+          "file_size": 5696,
+          "memory_size": 12288,
+          "flags": 6
+        }
+      ],
+      "toolchain_comment_strings": [
+        "Linker: LLD 23.1.1 (https://github.com/rust-lang/llvm-project.git 1b9c0d5ff9bbe7634aead059efe6b11a7eeba145)",
+        "clang version 22.1.8",
+        "rustc version 1.99.0 (b940084d7 2026-09-28)",
+        "GCC: (GNU) 9.4.0"
+      ]
+    },
+    "targeted_string_scans": {
+      "build_user_alias": {
+        "ascii_matches": 0,
+        "ascii_offsets": [],
+        "utf16le_matches": 0,
+        "utf16be_matches": 0
+      },
+      "business_alias_one": {
+        "ascii_matches": 0,
+        "ascii_offsets": [],
+        "utf16le_matches": 0,
+        "utf16be_matches": 0
+      },
+      "business_alias_two": {
+        "ascii_matches": 0,
+        "ascii_offsets": [],
+        "utf16le_matches": 0,
+        "utf16be_matches": 0
+      },
+      "windows_user_directory": {
+        "ascii_matches": 0,
+        "ascii_offsets": [],
+        "utf16le_matches": 0,
+        "utf16be_matches": 0
+      },
+      "unix_personal_home_directory": {
+        "ascii_matches": 0,
+        "ascii_offsets": [],
+        "utf16le_matches": 0,
+        "utf16be_matches": 0
+      },
+      "private_workspace_directory": {
+        "ascii_matches": 0,
+        "ascii_offsets": [],
+        "utf16le_matches": 0,
+        "utf16be_matches": 0
+      },
+      "private_workspace_date": {
+        "ascii_matches": 0,
+        "ascii_offsets": [],
+        "utf16le_matches": 0,
+        "utf16be_matches": 0
+      },
+      "private_tooling_directory": {
+        "ascii_matches": 0,
+        "ascii_offsets": [],
+        "utf16le_matches": 0,
+        "utf16be_matches": 0
+      },
+      "vendor_domains": {
+        "ascii_matches": 0,
+        "ascii_offsets": [],
+        "utf16le_matches": 0,
+        "utf16be_matches": 0
+      },
+      "original_launcher_name": {
+        "ascii_matches": 0,
+        "ascii_offsets": [],
+        "utf16le_matches": 0,
+        "utf16be_matches": 0
+      }
+    },
+    "attribution_strings": {
+      "visible_handle_utf8_count": 4,
+      "visible_link_utf8_count": 2,
+      "normal_credit_utf8_count": 2,
+      "json_comment_unicode_marker_utf8_count": 1,
+      "unicode_marker_codepoints": [
+        "U+200B",
+        "U+2060"
+      ],
+      "interpretation": "Visible credit/link and generated JSON _comment attribution are runtime strings. Ordinary Rust source comments are omitted by compilation. Unicode marker presence does not establish protection against deliberate editing."
+    },
+    "url_hosts": [
+      "docs.rs",
+      "github.com",
+      "t.me"
+    ],
+    "url_interpretation": "Compiled URL text alone does not prove a network request. These are attribution, upstream diagnostics and linker metadata strings."
+  },
+  "findings": []
+}

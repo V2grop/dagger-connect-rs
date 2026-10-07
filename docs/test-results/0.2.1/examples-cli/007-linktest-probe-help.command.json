@@ -1,0 +1,11 @@
+{
+  "arguments": [
+    "/root/privacy-validation/input/bin/dagger-rs",
+    "linktest",
+    "probe",
+    "--help"
+  ],
+  "timeout_sec": 30,
+  "expected_success": true,
+  "exit_code": 0
+}

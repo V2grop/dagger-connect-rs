@@ -1,0 +1,13 @@
+inner IPv4 relay binds only 10.206.0.1:47475
+inner IPv4 rogue identity rejection observed
+inner IPv4 wrong-pin identity rejection observed
+inner IPv4 initial: simultaneous ICMP, 1048577-byte TCP/SOCKS half-close, 16 UDP datagrams, and target denial passed
+inner IPv4 restart: simultaneous ICMP, 1048577-byte TCP/SOCKS half-close, 16 UDP datagrams, and target denial passed
+inner IPv4 server restart and owned TUN teardown passed
+inner IPv6 relay binds only fd42:206::1:47475
+inner IPv6 rogue identity rejection observed
+inner IPv6 wrong-pin identity rejection observed
+inner IPv6 initial: simultaneous ICMP, 1048577-byte TCP/SOCKS half-close, 16 UDP datagrams, and target denial passed
+inner IPv6 restart: simultaneous ICMP, 1048577-byte TCP/SOCKS half-close, 16 UDP datagrams, and target denial passed
+inner IPv6 server restart and owned TUN teardown passed
+Raw TUN plus forwarding matrix passed (IPv4 and IPv6)

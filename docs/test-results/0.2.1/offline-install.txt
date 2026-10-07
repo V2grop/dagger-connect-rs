@@ -1,0 +1,7 @@
+Dagger Rust — offline local installation
+Rust rewrite by ir_spoof: https://t.me/ir_spoof
+dagger-rs 0.2.1
+
+Installed locally. Open setup with:
+  /root/privacy-validation/installed/bin/dagger-setup
+Configs and keys: /root/privacy-validation/installed-config

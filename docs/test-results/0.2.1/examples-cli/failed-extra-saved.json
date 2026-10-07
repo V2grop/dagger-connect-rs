@@ -1,0 +1,65 @@
+{
+  "peer": "127.0.0.1:53207",
+  "reverse_listener": "127.0.0.2:40003",
+  "tcp": {
+    "ok": true,
+    "round_trips": 1,
+    "rtt_ms": 4.5586,
+    "error": null
+  },
+  "udp": {
+    "sent": 4,
+    "received": 4,
+    "loss_percent": 0.0,
+    "integrity": true,
+    "rtt_ms": 0.94685,
+    "error": null
+  },
+  "reverse_tcp": {
+    "ok": true,
+    "round_trips": 1,
+    "rtt_ms": 3.469,
+    "error": null
+  },
+  "reverse_udp": {
+    "sent": 4,
+    "received": 4,
+    "loss_percent": 0.0,
+    "integrity": true,
+    "rtt_ms": 0.852,
+    "error": null
+  },
+  "upload": {
+    "bytes": 6258688,
+    "seconds": 0.1227712,
+    "mbps": 407.82776416618884,
+    "integrity": true,
+    "error": null
+  },
+  "download": {
+    "bytes": 6815744,
+    "seconds": 0.1362746,
+    "mbps": 400.1182318641919,
+    "integrity": true,
+    "error": null
+  },
+  "ports": [
+    {
+      "port": 59937,
+      "tcp": {
+        "ok": false,
+        "round_trips": 0,
+        "rtt_ms": 0.0,
+        "error": "Connection refused (os error 111)"
+      },
+      "udp": {
+        "sent": 4,
+        "received": 0,
+        "loss_percent": 100.0,
+        "integrity": true,
+        "rtt_ms": 0.0,
+        "error": null
+      }
+    }
+  ]
+}

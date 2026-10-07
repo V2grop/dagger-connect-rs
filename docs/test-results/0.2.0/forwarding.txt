@@ -1,0 +1,24 @@
+
+running 1 test
+2026-10-07T12:33:33.211455Z  INFO dagger_rs::engine: tunnel listener ready address=127.0.0.1:34919
+2026-10-07T12:33:33.215086Z  INFO dagger_rs::engine: TCP map ready address=127.0.0.1:44287
+2026-10-07T12:33:33.219869Z  INFO dagger_rs::engine: SOCKS5 listener ready address=127.0.0.1:34207
+2026-10-07T12:33:33.236658Z  INFO dagger_rs::engine: TCP map ready address=127.0.0.1:39921
+2026-10-07T12:33:33.244668Z  INFO dagger_rs::engine: UDP map ready address=127.0.0.1:60551
+2026-10-07T12:33:33.349907Z  INFO dagger_rs::engine: authenticated tunnel connected address=127.0.0.1:34919
+2026-10-07T12:33:33.374389Z  INFO dagger_rs::engine: authenticated tunnel connected address=127.0.0.1:34919
+2026-10-07T12:33:35.084969Z DEBUG dagger_rs::engine: forwarded stream ended error=target rejected: target not allowed
+2026-10-07T12:33:35.117087Z DEBUG dagger_rs::engine: tunnel connection ended error=tunnel reader closed
+2026-10-07T12:33:35.128200Z DEBUG dagger_rs::engine: tunnel connection ended error=read record header
+2026-10-07T12:33:35.616059Z  INFO dagger_rs::engine: SOCKS5 listener ready address=127.0.0.1:34207
+2026-10-07T12:33:35.627555Z  INFO dagger_rs::engine: tunnel listener ready address=127.0.0.1:34919
+2026-10-07T12:33:35.629671Z  INFO dagger_rs::engine: TCP map ready address=127.0.0.1:39921
+2026-10-07T12:33:35.633987Z  INFO dagger_rs::engine: UDP map ready address=127.0.0.1:60551
+2026-10-07T12:33:35.636516Z  INFO dagger_rs::engine: TCP map ready address=127.0.0.1:44287
+2026-10-07T12:33:36.186210Z  INFO dagger_rs::engine: authenticated tunnel connected address=127.0.0.1:34919
+2026-10-07T12:33:36.215821Z  INFO dagger_rs::engine: authenticated tunnel connected address=127.0.0.1:34919
+2026-10-07T12:33:36.371876Z DEBUG dagger_rs::engine: tunnel connection ended error=tunnel reader closed
+test tcp_udp_socks_allowlist_and_reconnect ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 3.63s
+

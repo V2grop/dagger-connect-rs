@@ -1,0 +1,46 @@
+
+running 41 tests
+test config::tests::certificate_generation_preserves_existing_files ... ok
+test config::tests::generated_keys_load_relative_to_config_without_overwrite ... ok
+test config::tests::rejects_legacy_psk_and_unknown_fields ... ok
+test config::tests::tun_forwarding_clears_outer_tls_and_http_options ... ok
+test config::tests::tun_forwarding_requires_explicit_port_and_rejects_service_collisions ... ok
+test config::tests::tun_forwarding_uses_inner_ips_and_preserves_peer_authorization ... ok
+test config::tests::tun_validation_rejects_incompatible_routes_and_settings ... ok
+test config::tests::validates_endpoint_syntax_without_dns ... ok
+test quantum_carrier::tests::configured_windows_and_shared_auto_budget_are_bounded ... ok
+test config::tests::validates_transport_specific_settings ... ok
+test quantum_carrier::tests::knock_port_wrap_and_profiles_match_recovered_parameters ... ok
+test quantum_carrier::tests::fec_data_and_parity_preserve_conversation_for_demultiplexing ... ok
+test quantum_carrier::tests::malformed_fec_and_replays_do_not_escape_or_grow_storage ... ok
+test quantum_carrier::tests::timing_overrides_map_to_kcp_flags_and_preserve_peer_mtu_minimum ... ok
+test quantum_carrier::tests::parity_matches_independent_vandermonde_reference_and_recovers_each_loss ... ok
+test quantum_carrier::tuning::tests::ewma_window_budget_and_profile_targets_match_recovered_constants ... ok
+test quantum_carrier::tuning::tests::ack_samples_require_matching_conversation_sequence_and_timestamp_and_expire ... ok
+test quantum_carrier::tuning::tests::shared_socket_aggregates_peers_and_caps_global_memory_and_configured_maximum ... ok
+test quantum_carrier::tuning::tests::slow_shrink_waits_ten_window_updates_but_inflation_shrinks_immediately ... ok
+test raw_packet::tests::malformed_outer_packets_rejected ... ok
+test raw_packet::tests::profiles_decode_both_directions_and_padding ... ok
+test raw_packet::tests::proto58_is_dcpi_alias_and_legacy_ipv6_is_rejected ... ok
+test raw_packet::tests::quantum_tcp_camouflage_options ... ok
+test raw_packet::tests::recovered_outer_layout_vectors ... ok
+test raw_packet::tests::recovered_quantum_and_dcpi_ipv4_templates_are_distinct ... ok
+test raw_tun::tests::datagrams_survive_loss_and_reordering_and_reject_replay ... ok
+test raw_tun::tests::forged_large_nonce_does_not_advance_replay_window ... ok
+test raw_tun::tests::replay_bitmap_matches_reference_for_word_boundaries ... ok
+test transport::tests::authenticated_bidirectional_records ... ok
+test transport::tests::modified_and_replayed_ciphertext_is_rejected ... ok
+test transport::tests::untrusted_client_is_rejected ... ok
+test wire::tests::all_frame_types_roundtrip ... ok
+test wire::tests::malformed_frames_are_rejected_without_panics ... ok
+test xhttp_carrier::tests::cancelling_tunnel_removes_session_and_allows_new_download ... ok
+test xhttp_carrier::tests::chunk_decoder_rejects_oversize_and_bad_terminator ... ok
+test xhttp_carrier::tests::http_rejects_ambiguous_framing_bad_authority_and_oversize_before_body ... ok
+test xhttp_carrier::tests::packet_worker_honors_proxy_connection_close_and_empty_chunked_ack ... ok
+test xhttp_carrier::tests::padding_bounds_and_http_header_injection_are_rejected ... ok
+test xhttp_carrier::tests::upload_acknowledgement_waits_for_bounded_stream_capacity ... ok
+test xhttp_carrier::tests::uploads_order_and_reject_replays_and_unbounded_sequences ... ok
+test quantum_carrier::tuning::tests::guarded_controller_changes_idle_session_window_without_io_polls_and_stops_on_drop ... ok
+
+test result: ok. 41 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 3.59s
+

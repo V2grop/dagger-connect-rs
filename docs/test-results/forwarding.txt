@@ -1,0 +1,26 @@
+
+running 1 test
+test tcp_udp_socks_allowlist_and_reconnect ... 2026-10-06T19:42:45.296235Z  INFO dagger_rs::engine: SOCKS5 listener ready address=127.0.0.1:40111
+2026-10-06T19:42:45.298940Z  INFO dagger_rs::engine: tunnel listener ready address=127.0.0.1:39507
+2026-10-06T19:42:45.298342Z DEBUG dagger_rs::engine: tunnel connection failed address=127.0.0.1:39507 error=connect to configured peer
+2026-10-06T19:42:45.296594Z DEBUG dagger_rs::engine: tunnel connection failed address=127.0.0.1:39507 error=connect to configured peer
+2026-10-06T19:42:45.300169Z  INFO dagger_rs::engine: TCP map ready address=127.0.0.1:41077
+2026-10-06T19:42:45.300875Z  INFO dagger_rs::engine: TCP map ready address=127.0.0.1:35597
+2026-10-06T19:42:45.301038Z  INFO dagger_rs::engine: UDP map ready address=127.0.0.1:60775
+2026-10-06T19:42:46.342219Z  INFO dagger_rs::engine: authenticated tunnel connected address=127.0.0.1:39507
+2026-10-06T19:42:46.344151Z  INFO dagger_rs::engine: authenticated tunnel connected address=127.0.0.1:39507
+2026-10-06T19:42:47.297610Z DEBUG dagger_rs::engine: forwarded stream ended error=target rejected: target not allowed
+2026-10-06T19:42:47.304676Z DEBUG dagger_rs::engine: tunnel connection ended error=read record header
+2026-10-06T19:42:47.304872Z DEBUG dagger_rs::engine: tunnel connection ended error=tunnel reader closed
+2026-10-06T19:42:47.804048Z  INFO dagger_rs::engine: SOCKS5 listener ready address=127.0.0.1:40111
+2026-10-06T19:42:47.804882Z  INFO dagger_rs::engine: tunnel listener ready address=127.0.0.1:39507
+2026-10-06T19:42:47.805160Z  INFO dagger_rs::engine: UDP map ready address=127.0.0.1:60775
+2026-10-06T19:42:47.805214Z  INFO dagger_rs::engine: TCP map ready address=127.0.0.1:35597
+2026-10-06T19:42:47.805526Z  INFO dagger_rs::engine: TCP map ready address=127.0.0.1:41077
+2026-10-06T19:42:49.323691Z  INFO dagger_rs::engine: authenticated tunnel connected address=127.0.0.1:39507
+2026-10-06T19:42:49.327938Z  INFO dagger_rs::engine: authenticated tunnel connected address=127.0.0.1:39507
+2026-10-06T19:42:49.375349Z DEBUG dagger_rs::engine: tunnel session closed error=read record header
+ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 4.17s
+

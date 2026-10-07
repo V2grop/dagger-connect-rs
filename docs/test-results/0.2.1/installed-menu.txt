@@ -1,0 +1,16 @@
+
+Dagger Rust — local Linux setup
+Config directory: /root/privacy-validation/installed-config
+Rust rewrite by ir_spoof: https://t.me/ir_spoof
+1) Generate/show local public key
+2) Configure server or client
+3) Validate configuration
+4) Run in foreground
+5) Install and start systemd service
+6) Service status
+7) Restart service
+8) Stop service
+9) Recent logs
+10) Generate local TLS certificate
+11) Test an explicit peer link
+0) Exit

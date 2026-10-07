@@ -1,0 +1,5 @@
+dagger-rs 0.2.1
+Self-extracting offline bundle: /root/privacy-validation/export/bundle/dagger-rs-linux-x86_64.run
+Install and open the setup/service menu: sudo bash /root/privacy-validation/export/bundle/dagger-rs-linux-x86_64.run
+Local bundle: /root/privacy-validation/export/bundle/dagger-rs-linux-x86_64.tar.gz
+Copy the .run file to the matching Linux machine and run it with sudo bash to install and open setup.

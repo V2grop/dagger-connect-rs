@@ -1,0 +1,16 @@
+
+running 1 test
+test explicit_adaptive_tuning_keeps_a_live_udp_stream_usable_across_timer_updates ... adaptive server echoed round 0
+adaptive client received round 0
+2026-10-07T12:32:55.183776Z DEBUG dagger_rs::quantum_carrier::tuning: quantum adaptive tuning window=512 buffer=4194304 rtt_ms=24.546657114858927
+2026-10-07T12:32:55.253917Z DEBUG dagger_rs::quantum_carrier::tuning: quantum adaptive tuning window=512 buffer=4194304 rtt_ms=27.352679909803022
+adaptive server echoed round 1
+adaptive client received round 1
+adaptive server echoed round 2
+adaptive client received round 2
+adaptive server echoed round 3
+adaptive client received round 3
+ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 3 filtered out; finished in 7.36s
+

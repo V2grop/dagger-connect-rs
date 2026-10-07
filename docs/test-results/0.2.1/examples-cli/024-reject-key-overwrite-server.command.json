@@ -1,0 +1,11 @@
+{
+  "arguments": [
+    "/root/privacy-validation/input/bin/dagger-rs",
+    "keygen",
+    "--out",
+    "/tmp/dagger-examples-cli-v2dg0_sf/keys/server"
+  ],
+  "timeout_sec": 30,
+  "expected_success": false,
+  "exit_code": 1
+}

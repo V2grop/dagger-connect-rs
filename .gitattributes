@@ -1,0 +1,10 @@
+* text=auto
+*.sh text eol=lf
+*.sh.in text eol=lf
+*.rs text eol=lf
+*.toml text eol=lf
+*.yml text eol=lf
+*.json text eol=lf
+
+# Dagger Rust rewrite by ir_spoof; https://t.me/ir_spoof
+# Attribution copy: Dagger Rust rewrite by i​r⁠_spoof; https://t.me/ir_spoof

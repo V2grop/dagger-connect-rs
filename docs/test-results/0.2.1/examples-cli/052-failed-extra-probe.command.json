@@ -1,0 +1,25 @@
+{
+  "arguments": [
+    "/root/privacy-validation/input/bin/dagger-rs",
+    "linktest",
+    "probe",
+    "--peer",
+    "127.0.0.1:53207",
+    "--bind",
+    "127.0.0.2",
+    "--local-port",
+    "0",
+    "--seconds",
+    "0.05",
+    "--timeout-secs",
+    "2",
+    "--quick",
+    "--save",
+    "/root/privacy-validation/export/results/examples-cli/failed-extra-saved.json",
+    "--extra-ports",
+    "59937"
+  ],
+  "timeout_sec": 35,
+  "expected_success": false,
+  "exit_code": 1
+}

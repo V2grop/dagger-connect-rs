@@ -1,0 +1,16 @@
+
+running 11 tests
+test config::tests::certificate_generation_preserves_existing_files ... ok
+test config::tests::generated_keys_load_relative_to_config_without_overwrite ... ok
+test config::tests::rejects_legacy_psk_and_unknown_fields ... ok
+test config::tests::tun_validation_rejects_incompatible_routes_and_settings ... ok
+test config::tests::validates_endpoint_syntax_without_dns ... ok
+test config::tests::validates_transport_specific_settings ... ok
+test transport::tests::authenticated_bidirectional_records ... ok
+test transport::tests::modified_and_replayed_ciphertext_is_rejected ... ok
+test transport::tests::untrusted_client_is_rejected ... ok
+test wire::tests::all_frame_types_roundtrip ... ok
+test wire::tests::malformed_frames_are_rejected_without_panics ... ok
+
+test result: ok. 11 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.23s
+

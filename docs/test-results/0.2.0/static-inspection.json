@@ -1,0 +1,434 @@
+{
+  "binary": {
+    "path": "work/dagger-target/x86_64-unknown-linux-musl/release/dagger-rs",
+    "bytes": 7721864,
+    "sha256": "d95d049b4e0b51874d874f624c0a8afbcc04424b5870d0de3cd9be8f07e994dc",
+    "expected_sha256": "d95d049b4e0b51874d874f624c0a8afbcc04424b5870d0de3cd9be8f07e994dc",
+    "expected_hash_matches": true,
+    "elf": {
+      "class": "ELF64",
+      "endianness": "little",
+      "machine": "x86_64",
+      "type": "ET_DYN",
+      "osabi": 0,
+      "entry": "0x1d3700",
+      "entry_in_executable_load": true,
+      "interpreter": null,
+      "dt_needed_count": 0,
+      "no_dynamic_runtime_dependencies": true,
+      "gnu_stack": {
+        "flags": 6,
+        "executable": false
+      },
+      "gnu_relro_present": true,
+      "writable_executable_loads": [],
+      "debug_sections": [],
+      "full_symbol_table_present": false,
+      "stripped_of_debug_and_full_symbols": true,
+      "segments": [
+        {
+          "type": "0x6",
+          "flags": 4,
+          "offset": 64,
+          "virtual_address": "0x40",
+          "file_size": 560,
+          "memory_size": 560,
+          "alignment": 8
+        },
+        {
+          "type": "0x1",
+          "flags": 4,
+          "offset": 0,
+          "virtual_address": "0x0",
+          "file_size": 1910508,
+          "memory_size": 1910508,
+          "alignment": 4096
+        },
+        {
+          "type": "0x1",
+          "flags": 5,
+          "offset": 1910528,
+          "virtual_address": "0x1d3700",
+          "file_size": 5625790,
+          "memory_size": 5625790,
+          "alignment": 4096
+        },
+        {
+          "type": "0x1",
+          "flags": 6,
+          "offset": 7536320,
+          "virtual_address": "0x731ec0",
+          "file_size": 177752,
+          "memory_size": 180544,
+          "alignment": 4096
+        },
+        {
+          "type": "0x1",
+          "flags": 6,
+          "offset": 7714080,
+          "virtual_address": "0x75e520",
+          "file_size": 5696,
+          "memory_size": 12288,
+          "alignment": 4096
+        },
+        {
+          "type": "0x7",
+          "flags": 4,
+          "offset": 7536320,
+          "virtual_address": "0x731ec0",
+          "file_size": 272,
+          "memory_size": 480,
+          "alignment": 8
+        },
+        {
+          "type": "0x2",
+          "flags": 6,
+          "offset": 7700904,
+          "virtual_address": "0x75a1a8",
+          "file_size": 320,
+          "memory_size": 320,
+          "alignment": 8
+        },
+        {
+          "type": "0x6474e552",
+          "flags": 4,
+          "offset": 7536320,
+          "virtual_address": "0x731ec0",
+          "file_size": 177752,
+          "memory_size": 180544,
+          "alignment": 1
+        },
+        {
+          "type": "0x6474e550",
+          "flags": 4,
+          "offset": 1162736,
+          "virtual_address": "0x11bdf0",
+          "file_size": 92172,
+          "memory_size": 92172,
+          "alignment": 4
+        },
+        {
+          "type": "0x6474e551",
+          "flags": 6,
+          "offset": 0,
+          "virtual_address": "0x0",
+          "file_size": 0,
+          "memory_size": 0,
+          "alignment": 0
+        }
+      ],
+      "sections": [
+        {
+          "name": "",
+          "type": 0,
+          "flags": 0,
+          "offset": 0,
+          "size": 0
+        },
+        {
+          "name": ".dynsym",
+          "type": 11,
+          "flags": 2,
+          "offset": 624,
+          "size": 24
+        },
+        {
+          "name": ".gnu.hash",
+          "type": 1879048182,
+          "flags": 2,
+          "offset": 648,
+          "size": 28
+        },
+        {
+          "name": ".hash",
+          "type": 5,
+          "flags": 2,
+          "offset": 676,
+          "size": 16
+        },
+        {
+          "name": ".dynstr",
+          "type": 3,
+          "flags": 2,
+          "offset": 692,
+          "size": 1
+        },
+        {
+          "name": ".rela.dyn",
+          "type": 4,
+          "flags": 2,
+          "offset": 696,
+          "size": 259944
+        },
+        {
+          "name": ".rodata",
+          "type": 1,
+          "flags": 50,
+          "offset": 262144,
+          "size": 570721
+        },
+        {
+          "name": ".gcc_except_table",
+          "type": 1,
+          "flags": 2,
+          "offset": 832868,
+          "size": 329868
+        },
+        {
+          "name": ".eh_frame_hdr",
+          "type": 1,
+          "flags": 2,
+          "offset": 1162736,
+          "size": 92172
+        },
+        {
+          "name": ".eh_frame",
+          "type": 1,
+          "flags": 2,
+          "offset": 1254912,
+          "size": 655596
+        },
+        {
+          "name": ".text",
+          "type": 1,
+          "flags": 6,
+          "offset": 1910528,
+          "size": 5625784
+        },
+        {
+          "name": ".init",
+          "type": 1,
+          "flags": 6,
+          "offset": 7536312,
+          "size": 3
+        },
+        {
+          "name": ".fini",
+          "type": 1,
+          "flags": 6,
+          "offset": 7536315,
+          "size": 3
+        },
+        {
+          "name": ".tdata",
+          "type": 1,
+          "flags": 1027,
+          "offset": 7536320,
+          "size": 272
+        },
+        {
+          "name": ".tbss",
+          "type": 8,
+          "flags": 1027,
+          "offset": 7536592,
+          "size": 208
+        },
+        {
+          "name": ".fini_array",
+          "type": 15,
+          "flags": 3,
+          "offset": 7536592,
+          "size": 8
+        },
+        {
+          "name": ".init_array",
+          "type": 14,
+          "flags": 3,
+          "offset": 7536600,
+          "size": 8
+        },
+        {
+          "name": ".data.rel.ro",
+          "type": 1,
+          "flags": 3,
+          "offset": 7536608,
+          "size": 164296
+        },
+        {
+          "name": ".dynamic",
+          "type": 6,
+          "flags": 3,
+          "offset": 7700904,
+          "size": 320
+        },
+        {
+          "name": ".got",
+          "type": 1,
+          "flags": 3,
+          "offset": 7701224,
+          "size": 12824
+        },
+        {
+          "name": ".got.plt",
+          "type": 1,
+          "flags": 3,
+          "offset": 7714048,
+          "size": 24
+        },
+        {
+          "name": ".relro_padding",
+          "type": 8,
+          "flags": 3,
+          "offset": 7714072,
+          "size": 2792
+        },
+        {
+          "name": ".data",
+          "type": 1,
+          "flags": 3,
+          "offset": 7714080,
+          "size": 5696
+        },
+        {
+          "name": ".bss",
+          "type": 8,
+          "flags": 3,
+          "offset": 7719776,
+          "size": 6592
+        },
+        {
+          "name": ".comment",
+          "type": 1,
+          "flags": 48,
+          "offset": 7719776,
+          "size": 191
+        },
+        {
+          "name": ".shstrtab",
+          "type": 3,
+          "flags": 0,
+          "offset": 7719967,
+          "size": 229
+        }
+      ],
+      "dynamic_tags": [
+        {
+          "tag": 30,
+          "value": 8
+        },
+        {
+          "tag": 1879048187,
+          "value": 134217729
+        },
+        {
+          "tag": 21,
+          "value": 0
+        },
+        {
+          "tag": 7,
+          "value": 696
+        },
+        {
+          "tag": 8,
+          "value": 259944
+        },
+        {
+          "tag": 9,
+          "value": 24
+        },
+        {
+          "tag": 1879048185,
+          "value": 10831
+        },
+        {
+          "tag": 6,
+          "value": 624
+        },
+        {
+          "tag": 11,
+          "value": 24
+        },
+        {
+          "tag": 5,
+          "value": 692
+        },
+        {
+          "tag": 10,
+          "value": 1
+        },
+        {
+          "tag": 1879047925,
+          "value": 648
+        },
+        {
+          "tag": 4,
+          "value": 676
+        },
+        {
+          "tag": 25,
+          "value": 7544792
+        },
+        {
+          "tag": 27,
+          "value": 8
+        },
+        {
+          "tag": 26,
+          "value": 7544784
+        },
+        {
+          "tag": 28,
+          "value": 8
+        },
+        {
+          "tag": 12,
+          "value": 7540408
+        },
+        {
+          "tag": 13,
+          "value": 7540411
+        },
+        {
+          "tag": 0,
+          "value": 0
+        }
+      ]
+    },
+    "literal_scans": {
+      "targeted_patterns": {
+        "host_build_username": {
+          "ascii_matches": 0,
+          "offsets": [],
+          "utf16le_matches": 0
+        },
+        "windows_user_home": {
+          "ascii_matches": 0,
+          "offsets": [],
+          "utf16le_matches": 0
+        },
+        "unix_user_home": {
+          "ascii_matches": 0,
+          "offsets": []
+        },
+        "daggerconnect_domains": {
+          "ascii_matches": 0,
+          "offsets": []
+        },
+        "original_launcher_name": {
+          "ascii_matches": 0,
+          "offsets": []
+        },
+        "vendor_license_denial": {
+          "ascii_matches": 0,
+          "offsets": []
+        },
+        "windows_user_home_forward": {
+          "utf16le_matches": 0
+        },
+        "daggerconnect_domain": {
+          "utf16le_matches": 0
+        }
+      },
+      "url_hosts": [
+        "docs.rs",
+        "github.com",
+        "t.me"
+      ],
+      "community_link_count": 1,
+      "url_fragment_count": 11,
+      "interpretation": "URL strings are display/diagnostic literals, not evidence of requests. Rust may concatenate adjacent string literals in the binary. The accompanying runtime-source review identifies call destinations."
+    }
+  },
+  "scope": "Static ELF, path/domain and license checks; runtime coverage is in testing.md.",
+  "findings": []
+}

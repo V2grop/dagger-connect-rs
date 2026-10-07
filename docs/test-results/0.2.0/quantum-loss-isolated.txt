@@ -1,0 +1,12 @@
+
+running 1 test
+test quantum_plus_transfers_with_one_lost_data_shard_per_block ... Error: deadline has elapsed
+FAILED
+
+failures:
+
+failures:
+    quantum_plus_transfers_with_one_lost_data_shard_per_block
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 3 filtered out; finished in 45.08s
+

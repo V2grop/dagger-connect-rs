@@ -1,0 +1,15 @@
+{
+  "_comment": "Dagger Rust rewrite by ir_spoof; https://t.me/ir_spoof; credit: i​r⁠_spoof",
+  "allowed_targets": [
+    "127.0.0.1:8080"
+  ],
+  "mode": "client",
+  "paths": [
+    {
+      "addr": "127.0.0.1:7000",
+      "connection_pool": 1,
+      "server_public_key": "REPLACE_WITH_SERVER_PUBLIC_KEY_HEX"
+    }
+  ],
+  "private_key_file": "client-keys/private.key"
+}

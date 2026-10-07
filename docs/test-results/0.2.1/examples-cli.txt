@@ -1,0 +1,234 @@
+PASSED version-and-all-nested-help
+PASSED invalid-commands-return-nonzero
+PASSED fresh-private-identities-and-no-overwrite
+PASSED all-shipped-json-examples-check
+PASSED generated-cli-examples-and-subcommand-conflicts
+PASSED ipv4-selected-source-bidirectional-payloads-extra-port-and-exact-save
+PASSED ipv6-loopback-bidirectional-payloads-extra-port-and-exact-save
+PASSED failed-extra-port-still-saves-identical-json-and-returns-nonzero
+{
+  "status": "passed",
+  "binary_sha256": "fccb58880f6dfd53e74349b5780f662b3b2c9f1fea6c21d9e3c738b830457eb7",
+  "checks": [
+    {
+      "name": "version-and-all-nested-help",
+      "status": "passed"
+    },
+    {
+      "name": "invalid-commands-return-nonzero",
+      "status": "passed",
+      "details": {
+        "count": 15
+      }
+    },
+    {
+      "name": "fresh-private-identities-and-no-overwrite",
+      "status": "passed",
+      "details": {
+        "certificate_names": [
+          "127.0.0.1",
+          "::1",
+          "localhost",
+          "tunnel.example.com"
+        ]
+      }
+    },
+    {
+      "name": "all-shipped-json-examples-check",
+      "status": "passed",
+      "details": {
+        "count": 16
+      }
+    },
+    {
+      "name": "generated-cli-examples-and-subcommand-conflicts",
+      "status": "passed"
+    },
+    {
+      "name": "ipv4-selected-source-bidirectional-payloads-extra-port-and-exact-save",
+      "status": "passed"
+    },
+    {
+      "name": "ipv6-loopback-bidirectional-payloads-extra-port-and-exact-save",
+      "status": "passed"
+    },
+    {
+      "name": "failed-extra-port-still-saves-identical-json-and-returns-nonzero",
+      "status": "passed"
+    }
+  ],
+  "examples": [
+    {
+      "file": "examples/client-quantum-plus.json",
+      "source_sha256": "cdf236ad785de6b135f1c3f2900aa9c265b6bfad397bc18bb2401e88d6bd091d",
+      "substituted_fields": [
+        "$.private_key_file",
+        "$.paths[0].server_public_key"
+      ],
+      "operational_options_unchanged": true,
+      "status": "passed"
+    },
+    {
+      "file": "examples/client-quantum.json",
+      "source_sha256": "d91fc2a113c6ae6a73e24a70684e9ffc583b50c289958960fae75632fbffba27",
+      "substituted_fields": [
+        "$.private_key_file",
+        "$.paths[0].server_public_key"
+      ],
+      "operational_options_unchanged": true,
+      "status": "passed"
+    },
+    {
+      "file": "examples/client-tun-forwarding.json",
+      "source_sha256": "5c2165fc545867b64bf423838f9b9f07ae5057af899d52bbd173a0081b5f1b24",
+      "substituted_fields": [
+        "$.private_key_file",
+        "$.paths[0].server_public_key"
+      ],
+      "operational_options_unchanged": true,
+      "status": "passed"
+    },
+    {
+      "file": "examples/client-tun.json",
+      "source_sha256": "4f07a12a51985fdf209e5cdc11b3533740667f8c04f482388595dd3d37d3c4a7",
+      "substituted_fields": [
+        "$.private_key_file",
+        "$.paths[0].server_public_key"
+      ],
+      "operational_options_unchanged": true,
+      "status": "passed"
+    },
+    {
+      "file": "examples/client-wss.json",
+      "source_sha256": "b74feaa9618688d7d2d7daf6306d1d0b59e8aee699fa5c55828096bcd350aff5",
+      "substituted_fields": [
+        "$.private_key_file",
+        "$.paths[0].ca_file",
+        "$.paths[0].server_public_key"
+      ],
+      "operational_options_unchanged": true,
+      "status": "passed"
+    },
+    {
+      "file": "examples/client-xhttp-reverse.json",
+      "source_sha256": "c94e7a62c25db40af12d10041c6536999ce85d71f31633cc2b5631ac5a6663e0",
+      "substituted_fields": [
+        "$.private_key_file",
+        "$.paths[0].cert_file",
+        "$.paths[0].key_file",
+        "$.paths[0].server_public_key"
+      ],
+      "operational_options_unchanged": true,
+      "status": "passed"
+    },
+    {
+      "file": "examples/client-xhttp.json",
+      "source_sha256": "ac43288f8c4f2119a13cea2840dfd861c516a1cbec03150f3ef5c23f7cfcb221",
+      "substituted_fields": [
+        "$.private_key_file",
+        "$.paths[0].ca_file",
+        "$.paths[0].server_public_key"
+      ],
+      "operational_options_unchanged": true,
+      "status": "passed"
+    },
+    {
+      "file": "examples/client.json",
+      "source_sha256": "f67685911813b50a861e49409818919dc79adc2f41d6b8f4029c5795c59f3e94",
+      "substituted_fields": [
+        "$.private_key_file",
+        "$.paths[0].server_public_key"
+      ],
+      "operational_options_unchanged": true,
+      "status": "passed"
+    },
+    {
+      "file": "examples/server-quantum-plus.json",
+      "source_sha256": "a98e144dfda6e48ad7070a3a46543ec9b5f7e258ec2ecdcc43428ddeb6a5ed41",
+      "substituted_fields": [
+        "$.private_key_file",
+        "$.peer_public_keys"
+      ],
+      "operational_options_unchanged": true,
+      "status": "passed"
+    },
+    {
+      "file": "examples/server-quantum.json",
+      "source_sha256": "cbe7e3e7e0c883e0e1963958a038eb098fdc7fbcc43f2adbba2b5f80f11e95ab",
+      "substituted_fields": [
+        "$.private_key_file",
+        "$.peer_public_keys"
+      ],
+      "operational_options_unchanged": true,
+      "status": "passed"
+    },
+    {
+      "file": "examples/server-tun-forwarding.json",
+      "source_sha256": "7f8f6959ef3c404bd5bf0f823fd2dced435c21221707fbeec7e0214307c356c7",
+      "substituted_fields": [
+        "$.private_key_file",
+        "$.peer_public_keys"
+      ],
+      "operational_options_unchanged": true,
+      "status": "passed"
+    },
+    {
+      "file": "examples/server-tun.json",
+      "source_sha256": "94c28d86fded12e31a99339dd4fdc95de96b13607abea227e21b5ae8f386619d",
+      "substituted_fields": [
+        "$.private_key_file",
+        "$.peer_public_keys"
+      ],
+      "operational_options_unchanged": true,
+      "status": "passed"
+    },
+    {
+      "file": "examples/server-wss.json",
+      "source_sha256": "ba4e0201d4b06b7f6feeb0778df2e847a0fb13c687609aba3b57d32e1aa5e375",
+      "substituted_fields": [
+        "$.private_key_file",
+        "$.peer_public_keys",
+        "$.listeners[0].cert_file",
+        "$.listeners[0].key_file"
+      ],
+      "operational_options_unchanged": true,
+      "status": "passed"
+    },
+    {
+      "file": "examples/server-xhttp-reverse.json",
+      "source_sha256": "5a8921544cc2110d4b5e3797cb876d36f3aa1f944aa85f8760a3fd2b9916e319",
+      "substituted_fields": [
+        "$.private_key_file",
+        "$.peer_public_keys",
+        "$.listeners[0].ca_file"
+      ],
+      "operational_options_unchanged": true,
+      "status": "passed"
+    },
+    {
+      "file": "examples/server-xhttp.json",
+      "source_sha256": "09137427b3c5900319b3970be976c7a3158e5d052016cb9d1bfc489f6ae13eed",
+      "substituted_fields": [
+        "$.private_key_file",
+        "$.peer_public_keys",
+        "$.listeners[0].cert_file",
+        "$.listeners[0].key_file"
+      ],
+      "operational_options_unchanged": true,
+      "status": "passed"
+    },
+    {
+      "file": "examples/server.json",
+      "source_sha256": "dbb5eb375f9559fa64f38d88e3762d547f008dda7968aeb9ce7b64fec7cc29cd",
+      "substituted_fields": [
+        "$.private_key_file",
+        "$.peer_public_keys"
+      ],
+      "operational_options_unchanged": true,
+      "status": "passed"
+    }
+  ],
+  "version": "dagger-rs 0.2.1",
+  "example_count": 16,
+  "cleanup_errors": []
+}

@@ -1,0 +1,30 @@
+{
+  "_comment": "Dagger Rust rewrite by ir_spoof; https://t.me/ir_spoof; credit: i​r⁠_​s⁠p​o⁠o​f",
+  "mode": "server",
+  "private_key_file": "../keys/server/private.key",
+  "peer_public_keys": [
+    "REPLACE_WITH_CLIENT_PUBLIC_KEY_HEX"
+  ],
+  "listeners": [
+    {
+      "addr": "0.0.0.0:8443",
+      "maps": [
+        {
+          "type": "tcp",
+          "bind": "127.0.0.1:18080",
+          "target": "127.0.0.1:8080"
+        },
+        {
+          "type": "udp",
+          "bind": "127.0.0.1:15353",
+          "target": "127.0.0.1:5353"
+        }
+      ]
+    }
+  ],
+  "socks5": "127.0.0.1:1080",
+  "heartbeat_sec": 10,
+  "dead_timeout_sec": 40,
+  "max_streams": 256,
+  "max_connections": 16
+}

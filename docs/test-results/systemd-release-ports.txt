@@ -1,0 +1,86 @@
+dagger-rs 0.1.0
+
+Installed locally. Open setup with:
+  /usr/local/bin/dagger-setup
+Configs and keys: /etc/dagger-rs-final
+Private key saved to /etc/dagger-rs-final/server-keys/private.key
+[test public key omitted]
+Private key saved to /etc/dagger-rs-final/client-keys/private.key
+[test public key omitted]
+Certificate saved to /etc/dagger-rs-final/tls-test/cert.pem
+TLS private key saved to /etc/dagger-rs-final/tls-test/key.pem
+dagger-rs 0.1.0
+Running as unit: dagger-final-echo.service; invocation ID: ace6499fd0af44898303724aab1dbfad
+
+Dagger Rust — local Linux setup
+Config directory: /etc/dagger-rs-final
+1) Generate/show local public key
+2) Configure server or client
+3) Validate configuration
+4) Run in foreground
+5) Install and start systemd service
+6) Service status
+7) Restart service
+8) Stop service
+9) Recent logs
+10) Generate local TLS certificate
+0) Exit
+Configuration and private key are valid.
+Configuration and private key are valid.
+Enabled dagger-rs-server.service. Ports below 1024 may require explicit OS configuration.
+
+Dagger Rust — local Linux setup
+Config directory: /etc/dagger-rs-final
+1) Generate/show local public key
+2) Configure server or client
+3) Validate configuration
+4) Run in foreground
+5) Install and start systemd service
+6) Service status
+7) Restart service
+8) Stop service
+9) Recent logs
+10) Generate local TLS certificate
+0) Exit
+
+Dagger Rust — local Linux setup
+Config directory: /etc/dagger-rs-final
+1) Generate/show local public key
+2) Configure server or client
+3) Validate configuration
+4) Run in foreground
+5) Install and start systemd service
+6) Service status
+7) Restart service
+8) Stop service
+9) Recent logs
+10) Generate local TLS certificate
+0) Exit
+Configuration and private key are valid.
+Configuration and private key are valid.
+Enabled dagger-rs-client.service. Ports below 1024 may require explicit OS configuration.
+
+Dagger Rust — local Linux setup
+Config directory: /etc/dagger-rs-final
+1) Generate/show local public key
+2) Configure server or client
+3) Validate configuration
+4) Run in foreground
+5) Install and start systemd service
+6) Service status
+7) Restart service
+8) Stop service
+9) Recent logs
+10) Generate local TLS certificate
+0) Exit
+MainPID=2660
+User=dagger-rs
+ActiveState=active
+SubState=running
+MainPID=2775
+User=dagger-rs
+ActiveState=active
+SubState=running
+SYSTEMD_FORWARDING_PASS 257024
+SYSTEMD_FORWARDING_PASS 257024
+SYSTEMD_INSTALL_START_RESTART_STOP_PASS

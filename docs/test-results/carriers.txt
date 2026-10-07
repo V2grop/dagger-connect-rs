@@ -1,0 +1,16 @@
+
+running 2 tests
+test all_carriers_forward_tcp_udp_and_socks ... testing carrier tcp
+testing carrier http
+testing carrier https
+testing carrier ws
+testing carrier wss
+testing carrier xhttp
+testing carrier xhttps
+testing carrier dc6
+testing carrier kcp
+ok
+test carriers_reject_bad_tls_trust_names_and_paths ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 7.83s
+

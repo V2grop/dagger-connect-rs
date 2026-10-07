@@ -1,0 +1,11 @@
+{
+  "kernel": "Linux dagger-lab 6.8.0-142-generic #142-Ubuntu SMP PREEMPT_DYNAMIC Wed Sep  2 14:24:27 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux",
+  "os_release": "PRETTY_NAME=\"Ubuntu 24.04.5 LTS\"\nNAME=\"Ubuntu\"\nVERSION_ID=\"24.04\"\nVERSION=\"24.04.5 LTS (Noble Numbat)\"\nVERSION_CODENAME=noble\nID=ubuntu\nID_LIKE=debian\nHOME_URL=\"https://www.ubuntu.com/\"\nSUPPORT_URL=\"https://help.ubuntu.com/\"\nBUG_REPORT_URL=\"https://bugs.launchpad.net/ubuntu/\"\nPRIVACY_POLICY_URL=\"https://www.ubuntu.com/legal/terms-and-policies/privacy-policy\"\nUBUNTU_CODENAME=noble\nLOGO=ubuntu-logo\n",
+  "systemd": "systemd 255 (255.4-1ubuntu8.17)",
+  "binary_sha256": "d95d049b4e0b51874d874f624c0a8afbcc04424b5870d0de3cd9be8f07e994dc",
+  "binary_bytes": 7721864,
+  "namespaces_after_tests": [
+    "core-lab"
+  ],
+  "services_after_tests": "ActiveState=inactive\nSubState=dead\n\nActiveState=inactive\nSubState=dead\n"
+}

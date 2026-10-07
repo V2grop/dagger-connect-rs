@@ -1,0 +1,25 @@
+{
+  "_comment": "Dagger Rust rewrite by ir_spoof; https://t.me/ir_spoof; credit: i\u200br\u2060_\u200bs\u2060p\u200bo\u2060o\u200bf",
+  "mode": "client",
+  "private_key_file": "/tmp/dagger-examples-cli-v2dg0_sf/keys/client/private.key",
+  "reverse": true,
+  "allowed_targets": [
+    "127.0.0.1:8080",
+    "127.0.0.1:5353"
+  ],
+  "paths": [
+    {
+      "addr": "0.0.0.0:443",
+      "transport": "xhttps",
+      "http_path": "/tunnel",
+      "xhttp": {
+        "mode": "packet-up",
+        "host": "tunnel.example.com"
+      },
+      "cert_file": "/tmp/dagger-examples-cli-v2dg0_sf/tls/cert.pem",
+      "key_file": "/tmp/dagger-examples-cli-v2dg0_sf/tls/key.pem",
+      "server_public_key": "0c756e1c684c294a51a305adb72b6b01d882d1519e2e8decdb7180701d2b5961",
+      "connection_pool": 1
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "crate": "ring",
+  "version": "0.17.14",
+  "package_sha256": "a4689e6c2294d81e88dc6261c768b63bc4fcdb852be6d1352498b114f61383b7",
+  "target": "x86_64-unknown-linux-musl",
+  "source_files_verified": 391,
+  "libraries_sha256": {
+    "libring_core_0_17_14_.a": "a912bed5a63cdb1b3e4c65ab9de08914907a9e36ea2ed77dd207babd35e7a645",
+    "libring_core_0_17_14__test.a": "7a5898c9466dd3040cce41eed2f6425d81a9b3efc72032c4d72d84256e415b36"
+  },
+  "_comment": "Dagger Rust rewrite by ir_spoof; https://t.me/ir_spoof; credit: i\u200br\u2060_spoof",
+  "scope": "Unchanged C/assembly dependency compilation was reused from a hash-pinned local cache. All Rust sources were rebuilt with generic path remapping; final ELF debug sections and private workspace strings are absent."
+}
