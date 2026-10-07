@@ -1,0 +1,24 @@
+name: RustSec dependency audit
+on:
+  push:
+    branches: [security-review-20261008]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - name: Install the RustSec audit tool
+        run: cargo install cargo-audit --locked
+      - name: Check the locked dependencies
+        run: cargo audit --json > dependency-audit.json
+      - name: Preserve audit findings
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: rustsec-dependency-audit
+          path: dependency-audit.json
