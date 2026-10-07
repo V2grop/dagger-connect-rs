@@ -13,6 +13,17 @@ An independent Rust tunnel for Linux. Forward TCP/UDP ports, expose a SOCKS5 CON
 
 This is new source with locally authenticated framing. It **does not interoperate with DaggerConnect**. The supplied 4.2.8 core was analyzed to recover Quantum FEC, raw IPv4 layouts, TCP camouflage, spoofing and DCPI behavior. Authentication and payload encryption use local public keys instead of the original PSK and vendor verification. See [reconstruction evidence](docs/reconstruction.md) for the feature inventory and remaining differences.
 
+## Install a published V2grop Linux release
+
+On Ubuntu/Debian x86-64, after a successful release is available:
+
+```sh
+sudo apt-get update && sudo apt-get install -y ca-certificates curl python3
+curl -fL https://raw.githubusercontent.com/V2grop/dagger-connect-rs/main/scripts/install-release.sh -o install-dagger.sh && sudo bash install-dagger.sh
+```
+
+The helper selects one published release, downloads its installer and SHA-256 file, verifies the bundle and opens setup. See [Releases](https://github.com/V2grop/dagger-connect-rs/releases) and [the Persian guide](README.fa.md). Linux CI publishes a maintenance release only after all configured checks pass.
+
 ## Install the local Linux release
 
 Place `dagger-rs-linux-x86_64.run` on each Linux host and run:

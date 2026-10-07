@@ -6,6 +6,9 @@ on:
   workflow_dispatch:
 permissions:
   contents: read
+concurrency:
+  group: linux-release-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   check:
     permissions:
@@ -21,6 +24,11 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y iproute2 iputils-ping python3
+      - name: Shell syntax checks
+        run: |
+          for script in scripts/*.sh scripts/*.sh.in tests/*.sh; do
+            bash -n "$script"
+          done
       - name: Installer regression checks
         run: python3 -m unittest discover -s tests -p 'test_install.py' -v
       - run: cargo fmt --all -- --check

@@ -8,6 +8,23 @@
 
 در سورس مسیرهای TCP، KCP، HTTP/HTTPS، WS/WSS، XHTTP/XHTTPS، DC6، Quantum+، Quantum/Gaming و Raw TUN وجود دارند. وجود کد به معنی تأیید عملکرد در تمام شبکه‌ها نیست. محدودیت‌ها در [گزارش بازسازی](docs/reconstruction.md) و [مدل امنیتی](docs/security.md) آمده‌اند.
 
+## نصب از GitHub Releases
+
+پس از انتشار موفق بسته در [Releases](https://github.com/V2grop/dagger-connect-rs/releases)، روی هر سرور Ubuntu/Debian با معماری x86-64 اجرا کنید:
+
+```sh
+sudo apt-get update && sudo apt-get install -y ca-certificates curl python3
+curl -fL https://raw.githubusercontent.com/V2grop/dagger-connect-rs/main/scripts/install-release.sh -o install-dagger.sh && sudo bash install-dagger.sh
+```
+
+اسکریپت نسخهٔ منتشرشده را انتخاب می‌کند، فایل نصب و checksum همان نسخه را می‌گیرد، صحت فایل را بررسی و منوی تنظیمات را باز می‌کند. اگر هنوز Release ساخته نشده باشد، نصب متوقف می‌شود. دفعات بعد:
+
+```sh
+sudo /usr/local/bin/dagger-setup
+```
+
+برای تونل ساده، ایران `server` و خارج `client` است. روی هر طرف گزینهٔ ۱ را برای کلیدهای همان نقش اجرا کنید؛ فقط کلید عمومی را مبادله کنید. در گزینهٔ ۲، هر دو طرف کلید عمومی طرف مقابل را وارد کنند. ایران: `tcp`، `ports`، شنود `0.0.0.0:7000`، فوروارد TCP با bind `0.0.0.0:18080` و target `127.0.0.1:8080`. خارج: `tcp`، `ports`، اتصال به `IRAN_IP:7000`، مقصد مجاز `127.0.0.1:8080` و pool برابر ۱. سرویس مقصد باید روی خارج فعال باشد. در ایران پورت ۷۰۰۰/TCP را برای IP خارج و ۱۸۰۸۰/TCP را برای کاربران مجاز باز کنید. روی هر طرف گزینهٔ ۳ برای اعتبارسنجی و سپس گزینهٔ ۵ برای سرویس systemd؛ وضعیت با ۶ و لاگ با ۹.
+
 ## ساخت
 
 روی لینوکس با Rust پایدار و ابزارهای ساخت بومی:
