@@ -9,3 +9,12 @@ Fix: the installer replaces a symlink at dagger-setup without overwriting its ta
 For Ubuntu/Debian x86-64, download the .run and matching .run.sha256 asset into the same directory, verify with sha256sum -c, then run sudo bash dagger-rs-linux-x86_64.run. Python 3 is required for setup. The installation opens the menu; later use sudo /usr/local/bin/dagger-setup.
 
 Network behavior depends on host privileges, firewall and routing. See README.fa.md and docs/security.md. No claim of universal network/CDN compatibility or independent cryptographic audit.
+
+
+Adds a second, original-style menu (`dagger-setup-classic`) alongside `dagger-setup`.
+Both menus share the Rust configuration, keys and hardened systemd services.
+The root `setup.sh` installs a checksummed release and opens the second menu.
+Numeric transport selection, validated config editing, live logs and service controls
+are available. Existing configs are retained on install; running services are not
+restarted automatically. No dependency changes are included: the previously reported
+time 0.3.45 advisory and rustls-pemfile maintenance warning remain outstanding.

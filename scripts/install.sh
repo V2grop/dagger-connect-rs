@@ -52,17 +52,22 @@ fi
 install -d -m 755 "$prefix/bin" "$prefix/share/dagger-rs"
 install -d -m 700 "$config_dir"
 install -m 755 "$binary" "$prefix/bin/dagger-rs"
-install -m 755 "$script_dir/setup.sh" "$prefix/share/dagger-rs/setup.sh"
-wrapper=$(mktemp "$prefix/bin/.dagger-setup.XXXXXXXX")
-trap 'rm -f -- "$wrapper"' EXIT
-{
-  echo '#!/usr/bin/env bash'
-  printf 'export DAGGER_BIN=%q\n' "$prefix/bin/dagger-rs"
-  printf 'export DAGGER_CONFIG_DIR=%q\n' "$config_dir"
-  printf 'exec bash %q "$@"\n' "$prefix/share/dagger-rs/setup.sh"
-} > "$wrapper"
-chmod 755 "$wrapper"
-mv -fT -- "$wrapper" "$prefix/bin/dagger-setup"
+install -m 755 "$script_dir/setup.sh" "$script_dir/setup-classic.sh" "$script_dir/install-release.sh" "$prefix/share/dagger-rs/"
+wrapper=''
+trap '[[ -z $wrapper ]] || rm -f -- "$wrapper"' EXIT
+for menu in setup setup-classic; do
+  wrapper=$(mktemp "$prefix/bin/.dagger-$menu.XXXXXXXX")
+  {
+    echo '#!/usr/bin/env bash'
+    printf 'export DAGGER_BIN=%q\n' "$prefix/bin/dagger-rs"
+    printf 'export DAGGER_CONFIG_DIR=%q\n' "$config_dir"
+    printf 'export DAGGER_PREFIX=%q\n' "$prefix"
+    printf 'exec bash %q "$@"\n' "$prefix/share/dagger-rs/$menu.sh"
+  } > "$wrapper"
+  chmod 755 "$wrapper"
+  mv -fT -- "$wrapper" "$prefix/bin/dagger-$menu"
+  wrapper=''
+done
 printf '\nInstalled locally. Open setup with:\n  %q\nConfigs and keys: %s\n' "$prefix/bin/dagger-setup" "$config_dir"
 
 # Dagger Rust rewrite by ir_spoof; https://t.me/ir_spoof

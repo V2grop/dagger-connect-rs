@@ -1,6 +1,15 @@
 #!/usr/bin/env bash
 # Download a published V2grop maintenance bundle, verify it and open setup.
 set -euo pipefail
+menu=original
+while (( $# )); do
+  case $1 in
+    --menu) menu=${2:?Missing menu}; shift 2 ;;
+    -h|--help) echo 'Usage: bash install-release.sh [--menu original|classic]'; exit 0 ;;
+    *) echo "Unknown option: $1" >&2; exit 2 ;;
+  esac
+done
+case $menu in original|classic) ;; *) echo 'Menu must be original or classic.' >&2; exit 2 ;; esac
 [[ $(uname -s) == Linux && $(uname -m) == x86_64 ]] || {
   echo 'This release installer supports Linux x86-64 only.' >&2; exit 1;
 }
@@ -36,7 +45,7 @@ done
 (cd -- "$stage" && sha256sum --check --strict dagger-rs-linux-x86_64.run.sha256)
 printf 'Installing verified release %s\n' "$tag"
 if (( EUID == 0 )); then
-  bash "$stage/dagger-rs-linux-x86_64.run"
+  bash "$stage/dagger-rs-linux-x86_64.run" --menu "$menu"
 else
-  sudo bash "$stage/dagger-rs-linux-x86_64.run"
+  sudo bash "$stage/dagger-rs-linux-x86_64.run" --menu "$menu"
 fi

@@ -61,7 +61,20 @@ certificate_menu() {
 transport_prompt() {
   reverse=false
   echo 'Choose a tunnel carrier:'
-  ask 'Transport (tcp/http/https/ws/wss/xhttp/xhttps/dc6/kcp/quantum/quantum+/quantum-gaming/tun)' tcp
+  if [[ ${DAGGER_MENU_STYLE:-} == classic ]]; then
+    local -a carriers=(tcp ws wss http https quantum quantum+ tun xhttp xhttps dc6 quantum-gaming kcp)
+    local i
+    for i in "${!carriers[@]}"; do printf '   %2d) %s\n' "$((i+1))" "${carriers[$i]}"; done
+    ask 'Transport (number or name)' 1
+    case $REPLY in
+      1) REPLY=tcp ;; 2) REPLY=ws ;; 3) REPLY=wss ;; 4) REPLY=http ;;
+      5) REPLY=https ;; 6) REPLY=quantum ;; 7) REPLY=quantum+ ;; 8) REPLY=tun ;;
+      9) REPLY=xhttp ;; 10) REPLY=xhttps ;; 11) REPLY=dc6 ;;
+      12) REPLY=quantum-gaming ;; 13) REPLY=kcp ;;
+    esac
+  else
+    ask 'Transport (tcp/http/https/ws/wss/xhttp/xhttps/dc6/kcp/quantum/quantum+/quantum-gaming/tun)' tcp
+  fi
   transport=$REPLY
   case $transport in tcp|http|https|ws|wss|xhttp|xhttps|dc6|kcp|quantum|quantum+|quantum-gaming|tun) ;; *) echo 'Choose a listed transport.'; return 1 ;; esac
   extra=",\"transport\":\"$transport\""
@@ -436,10 +449,11 @@ linktest_menu() {
   [[ -z $REPLY ]] || args+=(--extra-ports "$REPLY")
   "${args[@]}"
 }
-if [[ ${1:-} == --help ]]; then
+if [[ ${BASH_SOURCE[0]} == "$0" && ${1:-} == --help ]]; then
   echo 'Usage: dagger-setup (interactive). Override DAGGER_BIN and DAGGER_CONFIG_DIR to use a local build or isolated directory.'
   exit 0
 fi
+if [[ ${BASH_SOURCE[0]} != "$0" ]]; then return 0; fi
 while true; do
   printf '\nDagger Rust — local Linux setup\nConfig directory: %s\n' "$config_dir"
   printf 'Rust rewrite by ir_spoof: https://t.me/ir_spoof\n'

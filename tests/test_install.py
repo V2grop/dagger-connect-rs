@@ -64,6 +64,33 @@ class InstallerTests(unittest.TestCase):
         self.assertEqual(list(wrapper.iterdir()), [])
         self.assertEqual(list(wrapper.parent.glob('.dagger-setup.*')), [])
 
+    def test_classic_menu_installs_server_with_numeric_transport(self):
+        import json
+        result = self.install()
+        self.assertEqual(result.returncode, 0, result.stderr)
+        keys = self.config / 'server-keys'
+        keys.mkdir()
+        (keys / 'private.key').write_text('fixture')
+        (keys / 'public.key').write_text('b' * 64)
+        inputs = '1\n' + 'a' * 64 + '\n1\n' + '\n' * 5 + 'no\n\n0\n'
+        result = subprocess.run([str(self.prefix / 'bin/dagger-setup-classic')],
+                                input=inputs, capture_output=True, text=True, timeout=10)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        config = json.loads((self.config / 'server.json').read_text())
+        self.assertEqual(config['mode'], 'server')
+        self.assertEqual(config['listeners'][0]['transport'], 'tcp')
+        self.assertEqual(config['listeners'][0]['maps'][0]['target'], '127.0.0.1:8080')
+        self.assertNotIn('Role (server/client)', result.stdout)
+
+    def test_classic_menu_can_open_previous_menu(self):
+        result = self.install()
+        self.assertEqual(result.returncode, 0, result.stderr)
+        result = subprocess.run([str(self.prefix / 'bin/dagger-setup-classic')],
+                                input='12\n0\n\n0\n', capture_output=True, text=True, timeout=10)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn('Dagger Rust — local Linux setup', result.stdout)
+        self.assertTrue((self.prefix / 'bin/dagger-setup').exists())
+
 
 
 

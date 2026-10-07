@@ -7,14 +7,18 @@ prefix=''
 config_dir=''
 extract_dir=''
 open_setup=yes
+menu=setup
 while (( $# )); do
   case $1 in
     --prefix) prefix=${2:?Missing --prefix value}; shift 2 ;;
     --config-dir) config_dir=${2:?Missing --config-dir value}; shift 2 ;;
     --extract) extract_dir=${2:?Missing --extract directory}; shift 2 ;;
+    --menu)
+      case ${2:-} in classic) menu=setup-classic ;; original) menu=setup ;; *) echo 'Menu must be classic or original.' >&2; exit 2 ;; esac
+      shift 2 ;;
     --no-setup) open_setup=no; shift ;;
     -h|--help)
-      echo 'Usage: sudo bash dagger-rs-linux.run [--prefix /usr/local] [--config-dir /etc/dagger-rs] [--no-setup]'
+      echo 'Usage: sudo bash dagger-rs-linux.run [--prefix /usr/local] [--config-dir /etc/dagger-rs] [--no-setup] [--menu classic|original]'
       echo '       bash dagger-rs-linux.run --extract NEW_DIRECTORY'
       echo 'Installs the embedded local binary and opens the setup/service menu. No downloads.'
       exit 0 ;;
@@ -52,7 +56,7 @@ else
 fi
 printf 'Dagger Rust — offline local installation\nRust rewrite by ir_spoof: https://t.me/ir_spoof\n'
 bash "$bundle/scripts/install.sh" --binary "$bundle/bin/dagger-rs" --prefix "$prefix" --config-dir "$config_dir"
-if [[ $open_setup == yes ]]; then "$prefix/bin/dagger-setup"; fi
+if [[ $open_setup == yes ]]; then "$prefix/bin/dagger-$menu"; fi
 exit 0
 
 # Dagger Rust rewrite by ir_spoof; https://t.me/ir_spoof

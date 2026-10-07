@@ -13,7 +13,7 @@ trap 'rm -rf -- "$stage"' EXIT
 bundle=$stage/dagger-rs-linux
 mkdir -p -- "$bundle/bin" "$bundle/scripts"
 install -m 755 "$binary" "$bundle/bin/dagger-rs"
-install -m 755 "$root/scripts/install.sh" "$root/scripts/setup.sh" "$bundle/scripts/"
+install -m 755 "$root/scripts/install.sh" "$root/scripts/setup.sh" "$root/scripts/setup-classic.sh" "$root/scripts/install-release.sh" "$bundle/scripts/"
 cp -- "$root/LICENSE" "$root/README.md" "$root/README.fa.md" "$bundle/"
 cp -R -- "$root/docs" "$root/examples" "$root/licenses" "$bundle/"
 mkdir -p -- "$bundle/vendor/tokio_kcp"
