@@ -65,5 +65,55 @@ class InstallerTests(unittest.TestCase):
         self.assertEqual(list(wrapper.parent.glob('.dagger-setup.*')), [])
 
 
+
+
+class ReleaseInstallerTests(unittest.TestCase):
+    def test_release_checksum_controls_execution(self):
+        import hashlib
+        import json
+        import os
+
+        for valid in (True, False):
+            with self.subTest(valid_checksum=valid), tempfile.TemporaryDirectory() as td:
+                base = Path(td)
+                shim = base / 'shim'
+                shim.mkdir()
+                fixture = base / 'fixture'
+                fixture.mkdir()
+                marker = base / 'executed'
+                payload = b'#!/usr/bin/env bash\nprintf installed > "$INSTALL_TEST_MARKER"\n'
+                name = 'dagger-rs-linux-x86_64.run'
+                (fixture / name).write_bytes(payload)
+                digest = hashlib.sha256(payload if valid else b'wrong payload').hexdigest()
+                (fixture / (name + '.sha256')).write_text(digest + '  ' + name + '\n')
+                (fixture / 'release.json').write_text(json.dumps({
+                    'tag_name': 'v0.2.1-v2grop.2',
+                    'assets': [{'name': name}, {'name': name + '.sha256'}],
+                }))
+                (shim / 'curl').write_text('''#!/usr/bin/env python3
+import os, pathlib, shutil, sys
+args = sys.argv[1:]
+url = next(a for a in args if a.startswith('https://'))
+name = 'release.json' if url.endswith('/releases/latest') else url.rsplit('/', 1)[-1]
+shutil.copyfile(pathlib.Path(os.environ['INSTALL_TEST_FIXTURE']) / name,
+                args[args.index('-o') + 1])
+''')
+                (shim / 'uname').write_text('#!/bin/sh\ncase "$1" in -s) echo Linux;; -m) echo x86_64;; esac\n')
+                (shim / 'sudo').write_text('#!/bin/sh\nexec "$@"\n')
+                for path in shim.iterdir():
+                    path.chmod(0o755)
+                env = dict(os.environ, PATH=str(shim) + os.pathsep + os.environ['PATH'],
+                           INSTALL_TEST_FIXTURE=str(fixture), INSTALL_TEST_MARKER=str(marker),
+                           TMPDIR=str(base))
+                result = subprocess.run(['bash', str(ROOT / 'scripts/install-release.sh')],
+                                        env=env, capture_output=True, text=True)
+                if valid:
+                    self.assertEqual(result.returncode, 0, result.stderr)
+                    self.assertEqual(marker.read_text(), 'installed')
+                else:
+                    self.assertNotEqual(result.returncode, 0)
+                    self.assertFalse(marker.exists())
+
+
 if __name__ == '__main__':
     unittest.main()
