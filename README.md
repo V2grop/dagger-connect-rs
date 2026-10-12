@@ -1,5 +1,11 @@
 # dagger-rs
 
+The supplied Rust core is preserved. The repaired setup now stops on errors,
+requires an explicit remote address and actual forwarding target, and offers
+service installation/restart as the default final step. See the
+[Persian two-host walkthrough](README.fa.md)
+and [source comparison / real forwarding tests](docs/setup-repair.md).
+
 [راهنمای فارسی](README.fa.md) · [Maintenance review](docs/maintenance-review.md)
 
 Dagger Rust rewrite by [ir_spoof](https://t.me/ir_spoof).

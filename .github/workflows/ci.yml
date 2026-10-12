@@ -35,6 +35,8 @@ jobs:
       - run: cargo clippy --locked --all-targets -- -D warnings
       - run: cargo test --locked --release --all-targets
       - run: cargo build --locked --release
+      - name: Real menu-generated tunnels and setup failure regression checks
+        run: python3 -m unittest discover -s tests -p 'test_setup.py' -v
       - name: Privileged Linux TUN integration
         run: |
           for carrier in tcp kcp http https ws wss xhttp xhttps dc6 quantum+; do

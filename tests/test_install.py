@@ -72,7 +72,8 @@ class InstallerTests(unittest.TestCase):
         keys.mkdir()
         (keys / 'private.key').write_text('fixture')
         (keys / 'public.key').write_text('b' * 64)
-        inputs = '1\n' + 'a' * 64 + '\n1\n' + '\n' * 5 + 'no\n\n0\n'
+        inputs = '\n'.join(['1', 'a' * 64, '1', 'ports', '0.0.0.0:7000',
+                            'tcp', '0.0.0.0:18080', '127.0.0.1:8080', 'no', '', '0']) + '\n'
         result = subprocess.run([str(self.prefix / 'bin/dagger-setup-classic')],
                                 input=inputs, capture_output=True, text=True, timeout=10)
         self.assertEqual(result.returncode, 0, result.stderr)

@@ -52,7 +52,7 @@ fi
 install -d -m 755 "$prefix/bin" "$prefix/share/dagger-rs"
 install -d -m 700 "$config_dir"
 install -m 755 "$binary" "$prefix/bin/dagger-rs"
-install -m 755 "$script_dir/setup.sh" "$script_dir/setup-classic.sh" "$script_dir/install-release.sh" "$prefix/share/dagger-rs/"
+install -m 755 "$script_dir/setup.sh" "$script_dir/setup-classic.sh" "$script_dir/install-release.sh" "$script_dir/diagnose.py" "$prefix/share/dagger-rs/"
 wrapper=''
 trap '[[ -z $wrapper ]] || rm -f -- "$wrapper"' EXIT
 for menu in setup setup-classic; do

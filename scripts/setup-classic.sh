@@ -10,14 +10,15 @@ if [[ -t 1 && ${TERM:-dumb} != dumb && -z ${NO_COLOR+x} ]]; then
 fi
 install_endpoint() {
   local selected=$1
-  # Reuse all Rust validation, key exchange and transport configuration prompts.
-  role_prompt() { role=$selected; }
-  configure
-  [[ -f $config_dir/$selected.json ]] || return 0
+  echo 'Step 1/2: configure this endpoint using the original dagger-rs core.'
+  configure "$selected"
   echo 'The other endpoint must also use dagger-rs. Exchange public keys only.'
-  ask "Install/start the $selected systemd service now? (yes/no)" no
+  yes_no "Step 2/2: install/start the $selected systemd service now?" yes
   if [[ $REPLY == yes ]]; then
-    install_service
+    install_service "$selected"
+  else
+    echo 'CONFIGURATION ONLY: the new settings have NOT been started.'
+    echo 'Use option 14 to install/restart this saved configuration later.'
   fi
 }
 service_control() {
@@ -30,14 +31,15 @@ service_control() {
 }
 edit_config() {
   role_prompt || return
-  local file=$config_dir/$role.json temporary editor=${EDITOR:-}
+  local file=$config_dir/$role.json temporary cleanup editor=${EDITOR:-}
   [[ -f $file && ! -L $file ]] || { echo 'A regular role config is required.'; return 1; }
   if [[ -z $editor ]]; then
     for editor in nano vi; do command -v "$editor" >/dev/null && break; done
   fi
   command -v "$editor" >/dev/null || { echo 'Install nano or set EDITOR to an editor executable.'; return 1; }
   temporary=$(mktemp "$config_dir/.edit.XXXXXXXX.json")
-  trap 'rm -f -- "$temporary"' EXIT
+  printf -v cleanup 'rm -f -- %q' "$temporary"
+  trap "$cleanup" EXIT
   cp -- "$file" "$temporary"
   "$editor" "$temporary"
   "$binary" -c "$temporary" --check || { echo 'Invalid configuration; existing file preserved.'; return 1; }
@@ -83,30 +85,33 @@ update_core() {
 show_menu() {
   printf '\n  %s%sDagger Rust Installer%s — V2grop\n' "$cyan" "$bold" "$reset"
   printf '  Independent Rust core | rewrite by ir_spoof\n  Config: %s\n\n' "$config_dir"
-  printf '  %sInstall%s\n    1) Install Server\n    2) Install Client\n\n' "$bold" "$reset"
+  printf '  %sInstall%s\n    1) Set up Server (Iran / entry)\n    2) Set up Client (abroad / target)\n\n' "$bold" "$reset"
   printf '  %sManage%s\n    3) Service Status\n    4) Service Control\n    5) Edit Config\n\n' "$bold" "$reset"
   printf '  %sLogs%s\n    6) Recent Logs\n    7) Live Logs\n\n' "$bold" "$reset"
-  printf '  %sDiagnose%s\n   11) Tester\n\n' "$bold" "$reset"
-  printf '  %sOther%s\n    8) Remove Service\n    9) Core Version\n   10) Update Rust Core\n   12) Open Previous Menu (keys / TLS / advanced setup)\n    0) Exit\n\n' "$bold" "$reset"
+  printf '  %sDiagnose%s\n   11) Peer network tester\n   13) Diagnose saved tunnel / target / service\n\n' "$bold" "$reset"
+  printf '  %sOther%s\n    8) Remove Service\n    9) Core Version\n   10) Update Rust Core\n   12) Open Previous Menu (keys / TLS / advanced setup)\n   14) Install/restart a saved configuration\n   15) Generate/show this machine\x27s public key\n    0) Exit\n\n' "$bold" "$reset"
 }
 if [[ ${1:-} == --help ]]; then echo 'Usage: dagger-setup-classic. Shares keys/configs/services with dagger-setup.'; exit 0; fi
 while true; do
   show_menu
   if ! ask 'Choice' 0; then exit 0; fi
-  # Isolate action failures and function overrides so the menu remains usable.
+  # run_action preserves errexit inside the action and keeps this menu usable.
   case $REPLY in
-    1) ( install_endpoint server ) || echo 'Server setup failed.' ;;
-    2) ( install_endpoint client ) || echo 'Client setup failed.' ;;
-    3) ( service_action status ) || true ;;
-    4) ( service_control ) || echo 'Service action failed.' ;;
-    5) ( edit_config ) || echo 'Config editing failed; check the message above.' ;;
-    6) ( service_action logs ) || true ;;
-    7) ( live_logs ) || true ;;
-    8) ( remove_service ) || echo 'Removal failed.' ;;
+    1) run_action install_endpoint server ;;
+    2) run_action install_endpoint client ;;
+    3) run_action service_action status ;;
+    4) run_action service_control ;;
+    5) run_action edit_config ;;
+    6) run_action service_action logs ;;
+    7) run_action live_logs ;;
+    8) run_action remove_service ;;
     9) "$binary" --version ;;
-    10) update_core ;;
-    11) ( linktest_menu ) || echo 'Link test failed.' ;;
+    10) run_action update_core ;;
+    11) run_action linktest_menu ;;
     12) DAGGER_MENU_STYLE=original bash "$script_dir/setup.sh" ;;
+    13) run_action diagnose_menu ;;
+    14) run_action install_service ;;
+    15) run_action key_menu ;;
     0) exit 0 ;;
     *) echo 'Choose a listed option.' ;;
   esac

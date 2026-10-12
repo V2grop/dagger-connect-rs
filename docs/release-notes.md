@@ -1,20 +1,32 @@
-# dagger-rs 0.2.1 — V2grop maintenance release
+# dagger-rs 0.2.1 — repaired two-host setup
 
-Independent Rust tunnel, originally authored by ir_spoof. Original MIT license and dependency notices are preserved. The 4.2.8 reference version belongs to DaggerConnect; this release does not interoperate with original DaggerConnect peers.
+Fixes menu options 1/2 completing without a usable setup. The Rust core,
+Cargo dependencies, wire protocol and all carriers are unchanged from the
+supplied dagger-rs 0.2.1 source. Attribution and licenses are preserved.
 
-Built from the commit attached to this release after Linux formatting, Clippy, Rust tests, installer regression tests, privileged TUN/raw carrier integration and packaging checks pass. The binary reports upstream source version 0.2.1; the release tag distinguishes these maintenance builds.
+- Setup stops at failed commands; rejecting or cancelling a config never falls
+  through to starting an older config. Failed edits preserve the existing JSON.
+- Peer key exchange has an explicit key-only path; a machine's own public key
+  is rejected. Option 15 displays/generates local keys.
+- Client dial address and actual target are required. Port maps default to
+  `0.0.0.0:18080` with an explicit explanation; SOCKS remains loopback-only by default.
+- Options 1/2 offer service start by default (`yes`, Enter or `1`). Saving without
+  starting is explicitly labelled. Option 14 installs/restarts saved configs.
+- Applying configuration restarts existing services, checks process state, and
+  enables core diagnostic logs. Failures do not print success.
+- Option 13 explains routes, checks explicit TCP endpoints and shows service logs.
+  TCP reachability and process state are not labelled as end-to-end tunnel success.
 
-Fix: the installer replaces a symlink at dagger-setup without overwriting its target. Includes a Persian guide and installer regression tests.
+The release workflow builds the unchanged core, runs the existing Rust/privileged
+TUN/raw suites, new real menu-generated forwarding tests, installer regressions
+and packaging before publishing this release. See `docs/setup-repair.md`.
 
-For Ubuntu/Debian x86-64, download the .run and matching .run.sha256 asset into the same directory, verify with sha256sum -c, then run sudo bash dagger-rs-linux-x86_64.run. Python 3 is required for setup. The installation opens the menu; later use sudo /usr/local/bin/dagger-setup.
+Run the repository's `setup.sh` on BOTH hosts for the latest verified release.
+Existing config/key files are retained. Reinstalling the bundle alone does not
+restart running services; use menu option 14 on each host to apply the new service
+settings, or options 1/2 to correct the saved configuration.
 
-Network behavior depends on host privileges, firewall and routing. See README.fa.md and docs/security.md. No claim of universal network/CDN compatibility or independent cryptographic audit.
-
-
-Adds a second, original-style menu (`dagger-setup-classic`) alongside `dagger-setup`.
-Both menus share the Rust configuration, keys and hardened systemd services.
-The root `setup.sh` installs a checksummed release and opens the second menu.
-Numeric transport selection, validated config editing, live logs and service controls
-are available. Existing configs are retained on install; running services are not
-restarted automatically. No dependency changes are included: the previously reported
-time 0.3.45 advisory and rustls-pemfile maintenance warning remain outstanding.
+The uploaded archive's outer name refers to DaggerConnect 4.2.8, but its contents
+are the independent dagger-rs 0.2.1 implementation. Both peers must run dagger-rs;
+it does not interoperate with original DaggerConnect peers. Actual host firewall,
+routing and target services must be configured for the selected network path.
