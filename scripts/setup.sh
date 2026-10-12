@@ -61,7 +61,7 @@ yes_no() {
 endpoint_pattern='^(\[[0-9a-fA-F:]+\]|[A-Za-z0-9_.-]+):[0-9]+$'
 role_prompt() {
   if [[ -n ${1:-} ]]; then role=$1
-  else ask 'Role (server=Iran/entry, client=abroad/target)' server; role=$REPLY; fi
+  else ask 'Role (server=Iran/entry, client=abroad/target)' server || return 1; role=$REPLY; fi
   [[ $role == server || $role == client ]] || { echo 'Choose server or client.'; return 1; }
 }
 key_prompt() {
@@ -546,10 +546,10 @@ while true; do
     3) if role_prompt; then "$binary" -c "$config_dir/$role.json" --check || true; fi ;;
     4) if role_prompt; then "$binary" -c "$config_dir/$role.json" || true; fi ;;
     5) run_action install_service ;;
-    6) service_action status || true ;;
-    7) service_action restart || true ;;
-    8) service_action stop || true ;;
-    9) service_action logs || true ;;
+    6) run_action service_action status ;;
+    7) run_action service_action restart ;;
+    8) run_action service_action stop ;;
+    9) run_action service_action logs ;;
     10) run_action certificate_menu ;;
     11) run_action linktest_menu ;;
     0) exit 0 ;;

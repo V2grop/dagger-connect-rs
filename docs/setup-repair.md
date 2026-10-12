@@ -38,7 +38,7 @@ output, restart/check steps and diagnostic logs address these cases.
 
 ## Local verification
 
-18 Python tests passed using the **actual supplied binary**, not a mock core for
+19 Python tests passed using the **actual supplied binary**, not a mock core for
 the forwarding tests. Both peers and destination echo services ran locally.
 Configurations were created through options 1/2 of the repaired menu.
 
@@ -50,6 +50,7 @@ Configurations were created through options 1/2 of the repaired menu.
 | UDP port forwarding and SOCKS5 CONNECT | Passed |
 | New connections after client process restart | Passed |
 | Keygen failure, own-key rejection, mid-config EOF | Passed |
+| Invalid role in the original menu never executes a service command | Passed |
 | Rejected/replacement-cancelled config never starts old config | Passed |
 | Missing dial address and invalid port are not accepted as defaults | Passed |
 | systemctl reload/enable/restart/state failures | Passed with isolated fixtures |

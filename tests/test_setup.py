@@ -79,6 +79,21 @@ class SetupFailures(unittest.TestCase):
         self.assertFalse((self.config / 'server.json').exists())
         self.assertEqual(list(self.config.glob('.config.*')), [])
 
+    def test_original_menu_rejects_invalid_role_before_service_command(self):
+        shim = self.base / 'role-shim'
+        shim.mkdir()
+        trace = self.base / 'unexpected-service-call'
+        command = shim / 'systemctl'
+        command.write_text('#!/bin/sh\ntouch "$ROLE_TEST_TRACE"\n')
+        command.chmod(0o755)
+        env = dict(self.env, PATH=str(shim) + os.pathsep + os.environ['PATH'], ROLE_TEST_TRACE=str(trace))
+        result = subprocess.run(['bash', str(ROOT / 'scripts/setup.sh')],
+                                input='7\ninvalid-role\n0\n', env=env,
+                                capture_output=True, text=True, timeout=10)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertFalse(trace.exists())
+        self.assertIn('Action failed', result.stdout)
+
     def test_action_stops_at_first_failed_command(self):
         marker = self.base / 'incorrect-success'
         script = 'source "$1"; broken() { false; touch "$2"; }; run_action broken unused "$2"; echo menu-alive'
