@@ -10,15 +10,15 @@ if [[ -t 1 && ${TERM:-dumb} != dumb && -z ${NO_COLOR+x} ]]; then
 fi
 install_endpoint() {
   local selected=$1
-  echo 'Step 1/2: configure this endpoint using the original dagger-rs core.'
-  configure "$selected"
-  echo 'The other endpoint must also use dagger-rs. Exchange public keys only.'
-  yes_no "Step 2/2: install/start the $selected systemd service now?" yes
+  echo 'مرحلهٔ 1 از 2: تنظیم سادهٔ ایران / خارج'
+  configure "$selected" guided
+  echo 'سرور مقابل هم باید تنظیم شود. فقط کلید عمومی بین دو سرور جابه‌جا می‌شود.'
+  yes_no "مرحلهٔ 2 از 2: سرویس همین سرور را اکنون فعال کنیم؟ / Step 2/2: start $selected?" yes
   if [[ $REPLY == yes ]]; then
     install_service "$selected"
   else
-    echo 'CONFIGURATION ONLY: the new settings have NOT been started.'
-    echo 'Use option 14 to install/restart this saved configuration later.'
+    echo 'فقط ذخیره شد؛ سرویس راه‌اندازی نشد. / CONFIGURATION ONLY: NOT started.'
+    echo 'برای فعال‌کردن تنظیم ذخیره‌شده، گزینهٔ 14 را بزنید.'
   fi
 }
 service_control() {
@@ -85,16 +85,16 @@ update_core() {
 show_menu() {
   printf '\n  %s%sDagger Rust Installer%s — V2grop\n' "$cyan" "$bold" "$reset"
   printf '  Independent Rust core | rewrite by ir_spoof\n  Config: %s\n\n' "$config_dir"
-  printf '  %sInstall%s\n    1) Set up Server (Iran / entry)\n    2) Set up Client (abroad / target)\n\n' "$bold" "$reset"
-  printf '  %sManage%s\n    3) Service Status\n    4) Service Control\n    5) Edit Config\n\n' "$bold" "$reset"
-  printf '  %sLogs%s\n    6) Recent Logs\n    7) Live Logs\n\n' "$bold" "$reset"
-  printf '  %sDiagnose%s\n   11) Peer network tester\n   13) Diagnose saved tunnel / target / service\n\n' "$bold" "$reset"
-  printf '  %sOther%s\n    8) Remove Service\n    9) Core Version\n   10) Update Rust Core\n   12) Open Previous Menu (keys / TLS / advanced setup)\n   14) Install/restart a saved configuration\n   15) Generate/show this machine\x27s public key\n    0) Exit\n\n' "$bold" "$reset"
+  printf '  %sInstall%s\n    1) تنظیم سادهٔ سرور ایران / IRAN\n    2) تنظیم سادهٔ سرور خارج / ABROAD\n\n' "$bold" "$reset"
+  printf '  %sManage%s\n    3) وضعیت سرویس همین سرور / Status\n    4) شروع، توقف یا ری‌استارت / Control\n    5) ویرایش تخصصی فایل تنظیم / Advanced edit\n\n' "$bold" "$reset"
+  printf '  %sLogs%s\n    6) خطاها و گزارش اخیر / Logs\n    7) گزارش زنده / Live logs\n\n' "$bold" "$reset"
+  printf '  %sDiagnose%s\n   11) تست تخصصی شبکه / Advanced network test\n   13) عیب‌یابی تونل و سرویس / Diagnose\n\n' "$bold" "$reset"
+  printf '  %sOther%s\n    8) حذف سرویس همین سرور / Remove\n    9) نسخهٔ برنامه / Version\n   10) دریافت نسخهٔ جدید / Update\n   12) تنظیمات پیشرفته: TLS / TUN / SOCKS / سایر روش‌ها\n   14) فعال‌کردن تنظیم ذخیره‌شده / Start saved config\n   15) نمایش کلید عمومی همین سرور / Public key\n    0) خروج / Exit\n\n' "$bold" "$reset"
 }
 if [[ ${1:-} == --help ]]; then echo 'Usage: dagger-setup-classic. Shares keys/configs/services with dagger-setup.'; exit 0; fi
 while true; do
   show_menu
-  if ! ask 'Choice' 0; then exit 0; fi
+  if ! ask 'شمارهٔ گزینه / Choice' 0; then exit 0; fi
   # run_action preserves errexit inside the action and keeps this menu usable.
   case $REPLY in
     1) run_action install_endpoint server ;;
@@ -115,5 +115,5 @@ while true; do
     0) exit 0 ;;
     *) echo 'Choose a listed option.' ;;
   esac
-  read -r -p 'Press Enter to return: ' _ || exit 0
+  read -r -p 'برای برگشت به منو Enter بزنید / Enter: ' _ || exit 0
 done

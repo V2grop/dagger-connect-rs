@@ -1,3 +1,11 @@
+## Guided Iran / abroad setup
+
+- Persian simple setup for Iran and abroad, with explicit host ownership and examples.
+- Separate host and port questions, Persian digits, validated ranges and peer-address checks.
+- Clear public-key exchange instructions and local-abroad service target explanation.
+- Review before save; cancellation preserves the previous configuration.
+- Existing Rust core and advanced workflows retained; guided module included in offline installers.
+
 # dagger-rs 0.2.1 — repaired two-host setup
 
 Fixes menu options 1/2 completing without a usable setup. The Rust core,

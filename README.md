@@ -128,3 +128,13 @@ The setup menu includes an [explicit-peer link tester](docs/linktest.md) for TCP
 Read [architecture](docs/architecture.md), [wire protocol](docs/protocol.md), [security](docs/security.md), and [reconstruction evidence](docs/reconstruction.md) for implementation details and limits.
 
 Dependency and runtime attribution is preserved in [third-party notices](docs/third-party.md) and `licenses/third-party`. Keep those files with redistributed binaries; the project MIT license does not replace upstream dependency licenses.
+
+## Guided Iran / abroad setup
+
+The classic entry point now uses a Persian guided port-forwarding wizard for options
+1 (Iran) and 2 (abroad). Each host and port is asked separately, with endpoint labels,
+examples, Persian-digit port normalization, peer-key guidance and a confirmation
+summary before saving. `127.0.0.1` in the service target always means the abroad
+machine. `q` cancels without replacing the previous configuration. TCP, Quantum+
+and KCP are offered in this simple path; option 12 retains the advanced workflow
+for the other carriers, TLS, TUN and SOCKS. See [the Persian walkthrough](README.fa.md).

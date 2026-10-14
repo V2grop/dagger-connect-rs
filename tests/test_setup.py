@@ -43,8 +43,8 @@ class SetupFailures(unittest.TestCase):
         old = self.config / 'server.json'
         old.write_text('{"original":true}')
         self.binary.write_text('#!/bin/sh\necho "core rejected config" >&2\nexit 1\n')
-        result = self.menu(['1', 'a' * 64, 'yes', '1', 'ports', '0.0.0.0:7000',
-                            'tcp', '0.0.0.0:18080', '127.0.0.1:8080', '', '0'])
+        result = self.menu(['1', 'a' * 64, 'yes', '1', '7000',
+                            '1', '18080', '127.0.0.1', '8080', '1', '', '0'])
         self.assertEqual(result.returncode, 0, result.stderr)
         self.assertIn('Configuration was rejected', result.stdout)
         self.assertNotIn('Step 2/2:', result.stdout)
@@ -148,11 +148,47 @@ exit 0"""}
         keys.mkdir()
         (keys / 'private.key').write_text('fixture')
         (keys / 'public.key').write_text('c' * 64)
-        result = self.menu(['2', 'a' * 64, '1', 'ports', '', 'bad:99999',
-                            '192.0.2.1:7000', '127.0.0.1:8080', '1', 'no', '', '0'])
+        result = self.menu(['2', 'a' * 64, '1', '', '127.0.0.1', '0.0.0.0', 'bad:99999',
+                            '192.0.2.1', '7000', '127.0.0.1', '8080', '1', 'no', '', '0'])
         config = json.loads((self.config / 'client.json').read_text())
         self.assertEqual(config['paths'][0]['addr'], '192.0.2.1:7000')
-        self.assertEqual(result.stdout.count('Required: host:port'), 2)
+        self.assertEqual(result.stdout.count('Invalid host.'), 4)
+
+
+
+    def test_guided_cancel_summary_preserves_config(self):
+        old = self.config / 'server.json'
+        old.write_text('{"original":true}')
+        result = self.menu(['1', 'a' * 64, 'yes', '1', '7000', '1', '18080',
+                            '', '2030', '2', '', '0'])
+        self.assertIn('REVIEW', result.stdout)
+        self.assertEqual(old.read_text(), '{"original":true}')
+        self.assertNotIn('Step 2/2:', result.stdout)
+        self.assertEqual(list(self.config.glob('.config.*')), [])
+
+    def test_guided_ports_reprompt_and_persian_digits(self):
+        result = self.menu(['1', 'a' * 64, '1', '0.0.0.0:7000', '۷۰۰۰', '1',
+                            '7000', '65536', '۲۰۳۰', '', '', '۸۰۸۰', '1', 'no', '', '0'])
+        config = json.loads((self.config / 'server.json').read_text())
+        listener = config['listeners'][0]
+        self.assertEqual(listener['addr'], '0.0.0.0:7000')
+        self.assertEqual(listener['maps'][0]['bind'], '0.0.0.0:2030')
+        self.assertEqual(listener['maps'][0]['target'], '127.0.0.1:8080')
+        self.assertIn('Invalid port.', result.stdout)
+        self.assertIn('CONFIGURATION ONLY', result.stdout)
+
+    def test_guided_quit_during_target_preserves_existing(self):
+        old = self.config / 'server.json'
+        old.write_text('{"original":true}')
+        result = self.menu(['1', 'a' * 64, 'yes', '2', '7000', '1', '18080', 'q', '', '0'])
+        self.assertEqual(old.read_text(), '{"original":true}')
+        self.assertIn('Setup cancelled', result.stdout)
+        self.assertEqual(list(self.config.glob('.config.*')), [])
+
+    def test_guided_ipv6_target_is_bracketed(self):
+        self.menu(['1', 'a' * 64, '3', '7000', '2', '18080', '::1', '2030', '1', 'no', '', '0'])
+        config = json.loads((self.config / 'server.json').read_text())
+        self.assertEqual(config['listeners'][0]['maps'][0]['target'], '[::1]:2030')
 
 
 class Echo(socketserver.BaseRequestHandler):
@@ -210,8 +246,11 @@ class RealMenuForwarding(unittest.TestCase):
             log.close()
 
     def menu(self, lines):
-        result = subprocess.run(['bash', str(ROOT / 'scripts/setup-classic.sh')],
-                                input='\n'.join(lines + ['no', '', '0']) + '\n', env=self.env,
+        role = 'server' if lines[0] == '1' else 'client'
+        # Exercise advanced configuration directly; options 1/2 now use the guided flow.
+        script = 'export DAGGER_MENU_STYLE=classic; source "$1"; configure "$2"; echo CONFIGURATION ONLY'
+        result = subprocess.run(['bash', '-c', script, 'test', str(ROOT / 'scripts/setup.sh'), role],
+                                input='\n'.join(lines[1:]) + '\n', env=self.env,
                                 capture_output=True, text=True, timeout=10)
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
         self.assertIn('CONFIGURATION ONLY', result.stdout, result.stdout + result.stderr)
@@ -350,6 +389,42 @@ class RealMenuForwarding(unittest.TestCase):
                 self.start('client')
                 self.start('server')
                 self.exchange(forwarded)
+                self.stop_all()
+
+
+    def test_guided_pair_forwards_real_payload(self):
+        for transport in ('1', '2', '3'):
+            with self.subTest(transport=transport):
+                target = self.echo_server()
+                target_port = target.rsplit(':', 1)[1]
+                tunnel_port, user_port = str(free_port()), str(free_port())
+                for role in ('server', 'client'):
+                    opposite = 'client' if role == 'server' else 'server'
+                    lines = ['1' if role == 'server' else '2', self.keys[opposite]]
+                    if (self.config / (role + '.json')).exists():
+                        lines += ['yes']
+                    lines += [transport]
+                    if role == 'client':
+                        lines += ['192.0.2.1']
+                    lines += [tunnel_port]
+                    if role == 'server':
+                        lines += ['1', user_port]
+                    lines += ['', target_port, '1', 'no', '', '0']
+                    result = subprocess.run(['bash', str(ROOT / 'scripts/setup-classic.sh')],
+                                            input='\n'.join(lines)+'\n', env=self.env,
+                                            capture_output=True, text=True, timeout=10)
+                    self.assertIn('CONFIGURATION ONLY', result.stdout, result.stdout+result.stderr)
+                    self.assertNotIn('Action failed', result.stdout)
+                # The guided UI rejects loopback as an Iran server address. Verify its
+                # saved peer, then substitute loopback only for this isolated network test.
+                client_file = self.config / 'client.json'
+                client = json.loads(client_file.read_text())
+                self.assertEqual(client['paths'][0]['addr'], '192.0.2.1:' + tunnel_port)
+                client['paths'][0]['addr'] = '127.0.0.1:' + tunnel_port
+                client_file.write_text(json.dumps(client))
+                self.start('server')
+                self.start('client')
+                self.exchange('127.0.0.1:' + user_port)
                 self.stop_all()
 
     def test_recovers_after_peer_restart(self):

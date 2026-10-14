@@ -52,6 +52,7 @@ yes_no() {
   while true; do
     ask "$label (yes/no, 1=yes, 2=no)" "$fallback"
     case ${REPLY,,} in
+      q) return 10 ;;
       yes|y|1) REPLY=yes; return 0 ;;
       no|n|2) REPLY=no; return 0 ;;
       *) echo 'Enter yes or no (or 1/2).' ;;
@@ -60,6 +61,7 @@ yes_no() {
 }
 endpoint_pattern='^(\[[0-9a-fA-F:]+\]|[A-Za-z0-9_.-]+):[0-9]+$'
 role_prompt() {
+  if [[ -z ${1:-} && ${DAGGER_MENU_STYLE:-} == classic ]]; then guide_role; return; fi
   if [[ -n ${1:-} ]]; then role=$1
   else ask 'Role (server=Iran/entry, client=abroad/target)' server || return 1; role=$REPLY; fi
   [[ $role == server || $role == client ]] || { echo 'Choose server or client.'; return 1; }
@@ -100,7 +102,15 @@ ensure_keys() {
   [[ -s $directory/private.key && -s $directory/public.key ]] || { echo 'Incomplete keypair; restore the matching private.key and public.key.'; return 1; }
   printf 'Local %s public key: ' "$role"; cat -- "$directory/public.key"; echo
 }
-key_menu() { role_prompt; ensure_keys; }
+key_menu() {
+  role_prompt
+  ensure_keys
+  if [[ ${DAGGER_MENU_STYLE:-} == classic ]]; then
+    if [[ $role == server ]]; then echo 'این کلید عمومی ایران است؛ در گزینهٔ 2 سرور خارج وارد کنید.'
+    else echo 'این کلید عمومی خارج است؛ در گزینهٔ 1 سرور ایران وارد کنید.'; fi
+    echo 'فقط رشتهٔ Public key را کپی کنید؛ کلید خصوصی روی همین سرور می‌ماند.'
+  fi
+}
 certificate_menu() {
   role_prompt || return
   local directory=$config_dir/$role-tls
@@ -264,26 +274,35 @@ carrier_address_prompt() {
   fi
 }
 configure() {
+  local guided=${2:-advanced}
   role_prompt "${1:-}"
-  ensure_keys
-  echo 'Exchange only public keys with the other machine. Private keys remain on their own machine.'
-  key_prompt
+  if [[ $guided == guided ]]; then
+    echo "راهنما: Enter = مقدار داخل کروشه؛ q = لغو. فقط همین سرور تغییر می‌کند."
+    guide_keys
+  else
+    ensure_keys
+    echo 'Exchange only public keys with the other machine. Private keys remain on their own machine.'
+    key_prompt
+  fi
   local file=$config_dir/$role.json temporary cleanup
   if [[ -e $file ]]; then
-    yes_no "Replace existing $file?" no
+    yes_no "جایگزینی تنظیم قبلی همین سرور؟ / Replace existing $file?" no
     [[ $REPLY == yes ]] || return 10
   fi
-  transport_prompt
+  if [[ $guided == guided ]]; then guide_transport; else transport_prompt; fi
   temporary=$(mktemp "$config_dir/.config.XXXXXX")
   printf -v cleanup 'rm -f -- %q' "$temporary"
   trap "$cleanup" EXIT
   local forwarding default_forwarding=ports
   [[ $transport != tun ]] || default_forwarding=tun
+  if [[ $guided == guided ]]; then forwarding=ports
+  else
   ask 'Forwarding mode (ports/tun/tun+ports)' "$default_forwarding"; forwarding=$REPLY
   case $forwarding in ports|tun|tun+ports) ;; *) echo 'Choose ports, tun, or tun+ports.'; rm -f -- "$temporary"; return 1 ;; esac
   if [[ $transport == tun && $forwarding == ports ]]; then
     echo 'The raw tun carrier requires tun or tun+ports forwarding.'
     rm -f -- "$temporary"; return 1
+  fi
   fi
   local tun_name='' tun_ip='' tun_peer='' mtu='' forward_port=''
   local kind='' bind='' target='' pool=1 carrier=''
@@ -306,8 +325,11 @@ configure() {
     fi
     echo 'TUN manages only its local interface and peer route. Additional forwarding/NAT must be configured explicitly.'
   fi
-  carrier_address_prompt; carrier=$address
-  if [[ $forwarding != tun && $role == server ]]; then
+  if [[ $guided == guided ]]; then guide_carrier; else carrier_address_prompt; fi
+  carrier=$address
+  if [[ $guided == guided ]]; then
+    guide_mapping
+  elif [[ $forwarding != tun && $role == server ]]; then
     if [[ $reverse == true && $forwarding == ports ]]; then
       ask 'Outbound edge connection pool size' 1; pool=$REPLY
       [[ $pool =~ ^[0-9]+$ ]] || { echo 'Pool size must be a number.'; rm -f -- "$temporary"; return 1; }
@@ -338,6 +360,7 @@ configure() {
     [[ $pool =~ ^[0-9]+$ ]] || { echo 'Pool size must be a number.'; rm -f -- "$temporary"; return 1; }
     pool=$((10#$pool))
   fi
+  if [[ $guided == guided ]]; then guide_summary; fi
   python3 - "$temporary" "$role" "$peer_key" "$carrier" "$extra" "$reverse" "$forwarding" \
     "$tun_name" "$tun_ip" "$tun_peer" "$mtu" "$forward_port" "$kind" "$bind" "$target" "$pool" <<'PY'
 import json,sys
@@ -379,7 +402,8 @@ PY
     fi
     echo "Saved $file. Edit JSON to add more mappings, listeners, or paths."
     trap - EXIT
-    python3 "$script_dir/diagnose.py" "$file" --summary-only
+    if [[ $guided == guided ]]; then guide_finish
+    else python3 "$script_dir/diagnose.py" "$file" --summary-only; fi
   else
     rm -f -- "$temporary"
     echo 'Configuration was rejected; existing config preserved.'
@@ -530,6 +554,7 @@ linktest_menu() {
   [[ -z $REPLY ]] || args+=(--extra-ports "$REPLY")
   "${args[@]}"
 }
+source "$script_dir/setup-guided.sh"
 if [[ ${BASH_SOURCE[0]} == "$0" && ${1:-} == --help ]]; then
   echo 'Usage: dagger-setup (interactive). Override DAGGER_BIN and DAGGER_CONFIG_DIR to use a local build or isolated directory.'
   exit 0
