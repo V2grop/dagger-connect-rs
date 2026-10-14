@@ -27,18 +27,68 @@ for path in "$binary" "$config_dir"; do
   [[ ! $path =~ [[:cntrl:]] && $path != *'"'* && $path != *'%'* && $path != *'$'* && $path != *'\'* ]] || { echo 'Paths cannot contain control characters, double quote, %, $, or backslash.' >&2; exit 2; }
 done
 
-ask() { local label=$1 fallback=${2:-}; read -r -p "$label${fallback:+ [$fallback]}: " REPLY; REPLY=${REPLY:-$fallback}; }
+ask() {
+  local label=$1 fallback=${2:-}
+  printf '%s%s: ' "$label" "${fallback:+ [$fallback]}"
+  if ! read -r REPLY; then echo 'Input closed; setup stopped.' >&2; return 1; fi
+  REPLY=${REPLY:-$fallback}
+}
+# Do not put a shell function/subshell on the left of || or inside if: Bash
+# disables errexit throughout its body, even after `set -e` inside that body.
+run_action() {
+  local status
+  set +e
+  ( set -e; "$@" )
+  status=$?
+  set -e
+  case $status in
+    0) ;;
+    10) echo 'Setup cancelled; no service was started.' ;;
+    *) printf 'Action failed (exit %s). Read the error above; setup did not complete.\n' "$status" ;;
+  esac
+}
+yes_no() {
+  local label=$1 fallback=${2:-no}
+  while true; do
+    ask "$label (yes/no, 1=yes, 2=no)" "$fallback"
+    case ${REPLY,,} in
+      yes|y|1) REPLY=yes; return 0 ;;
+      no|n|2) REPLY=no; return 0 ;;
+      *) echo 'Enter yes or no (or 1/2).' ;;
+    esac
+  done
+}
 endpoint_pattern='^(\[[0-9a-fA-F:]+\]|[A-Za-z0-9_.-]+):[0-9]+$'
-role_prompt() { ask 'Role (server/client)' server; role=$REPLY; [[ $role == server || $role == client ]] || { echo 'Choose server or client.'; return 1; }; }
+role_prompt() {
+  if [[ -n ${1:-} ]]; then role=$1
+  else ask 'Role (server=Iran/entry, client=abroad/target)' server || return 1; role=$REPLY; fi
+  [[ $role == server || $role == client ]] || { echo 'Choose server or client.'; return 1; }
+}
 key_prompt() {
-  ask 'Remote public key (64 hex characters)'
-  peer_key=$REPLY
-  [[ $peer_key =~ ^[0-9a-fA-F]{64}$ && ! $peer_key =~ ^0+$ ]] || { echo 'A valid remote public key is required.'; return 1; }
+  echo 'On the other machine, open option 1/2 to create its key. Copy its PUBLIC key here.'
+  echo 'If that key is not ready, press Enter to keep your local key and return to the menu.'
+  while true; do
+    ask 'Remote public key (64 hex characters; empty=return)'
+    peer_key=${REPLY,,}
+    [[ -n $peer_key ]] || return 10
+    if [[ $peer_key =~ ^[0-9a-f]{64}$ && ! $peer_key =~ ^0+$ ]]; then
+      local own_key
+      own_key=$(tr -d '\r\n' < "$config_dir/$role-keys/public.key")
+      if [[ $peer_key != "${own_key,,}" ]]; then return 0; fi
+      echo "That is this machine's key. Enter the OTHER machine's public key."
+    else echo 'A valid remote public key is required.'; fi
+  done
 }
 address_prompt() {
-  ask "$1" "$2"; address=$REPLY
-  # Restrict JSON interpolation to ordinary host:port/address syntax.
-  [[ $address =~ $endpoint_pattern ]] || { echo 'Use host:port or [IPv6]:port.'; return 1; }
+  while true; do
+    ask "$1" "$2" || return 1; address=$REPLY
+    # Restrict JSON interpolation to ordinary host:port/address syntax.
+    if [[ $address =~ $endpoint_pattern ]]; then
+      local port=${address##*:}
+      if (( ${#port} <= 5 )) && (( 10#$port >= 1 && 10#$port <= 65535 )); then return 0; fi
+    fi
+    echo 'Required: host:port or [IPv6]:port, port 1..65535.'
+  done
 }
 ensure_keys() {
   local directory=$config_dir/$role-keys
@@ -47,8 +97,10 @@ ensure_keys() {
   else
     "$binary" keygen --out "$directory"
   fi
-  if [[ -f $directory/public.key ]]; then printf 'Local public key: '; cat -- "$directory/public.key"; echo; fi
+  [[ -s $directory/private.key && -s $directory/public.key ]] || { echo 'Incomplete keypair; restore the matching private.key and public.key.'; return 1; }
+  printf 'Local %s public key: ' "$role"; cat -- "$directory/public.key"; echo
 }
+key_menu() { role_prompt; ensure_keys; }
 certificate_menu() {
   role_prompt || return
   local directory=$config_dir/$role-tls
@@ -109,7 +161,7 @@ transport_prompt() {
       if [[ -n $authority ]]; then extra+=",\"host\":\"$authority\""; fi
       extra+='}' ;;
     quantum|quantum-gaming|tun)
-      raw_prompt || return 1 ;;
+      raw_prompt ;;
   esac
   local tls_role=$role
   if [[ $reverse == true ]]; then
@@ -200,86 +252,90 @@ carrier_address_prompt() {
       return 0 ;;
   esac
   if [[ $reverse == true ]]; then
-    if [[ $role == server ]]; then address_prompt 'HTTP edge dial address' '127.0.0.1:7000'
+    if [[ $role == server ]]; then address_prompt 'HTTP edge dial address (required)' ''
     else address_prompt 'HTTP origin listen address' '0.0.0.0:7000'; fi
   elif [[ $role == server ]]; then
     local fallback='0.0.0.0:7000'
     [[ $transport != dc6 ]] || fallback='[::]:7000'
     address_prompt 'Tunnel listen address' "$fallback"
   else
-    local fallback='127.0.0.1:7000'
-    [[ $transport != dc6 ]] || fallback='[::1]:7000'
-    address_prompt 'Remote server dial address' "$fallback"
+    echo 'Enter the real server IP/domain and tunnel port, for example IRAN_IP:7000.'
+    address_prompt 'Remote server dial address (required)' ''
   fi
 }
 configure() {
-  role_prompt || return
+  role_prompt "${1:-}"
   ensure_keys
   echo 'Exchange only public keys with the other machine. Private keys remain on their own machine.'
-  key_prompt || return
-  local file=$config_dir/$role.json temporary
+  key_prompt
+  local file=$config_dir/$role.json temporary cleanup
   if [[ -e $file ]]; then
-    ask "Replace existing $file? Type yes to replace" no
-    [[ $REPLY == yes ]] || return 0
+    yes_no "Replace existing $file?" no
+    [[ $REPLY == yes ]] || return 10
   fi
-  transport_prompt || return
+  transport_prompt
   temporary=$(mktemp "$config_dir/.config.XXXXXX")
+  printf -v cleanup 'rm -f -- %q' "$temporary"
+  trap "$cleanup" EXIT
   local forwarding default_forwarding=ports
   [[ $transport != tun ]] || default_forwarding=tun
   ask 'Forwarding mode (ports/tun/tun+ports)' "$default_forwarding"; forwarding=$REPLY
-  case $forwarding in ports|tun|tun+ports) ;; *) echo 'Choose ports, tun, or tun+ports.'; rm -f -- "$temporary"; return ;; esac
+  case $forwarding in ports|tun|tun+ports) ;; *) echo 'Choose ports, tun, or tun+ports.'; rm -f -- "$temporary"; return 1 ;; esac
   if [[ $transport == tun && $forwarding == ports ]]; then
     echo 'The raw tun carrier requires tun or tun+ports forwarding.'
-    rm -f -- "$temporary"; return
+    rm -f -- "$temporary"; return 1
   fi
   local tun_name='' tun_ip='' tun_peer='' mtu='' forward_port=''
   local kind='' bind='' target='' pool=1 carrier=''
   if [[ $forwarding != ports ]]; then
     ask 'TUN interface name' dagger0; tun_name=$REPLY
-    [[ $tun_name =~ ^[A-Za-z0-9_-]{1,15}$ ]] || { echo 'Invalid interface name.'; rm -f -- "$temporary"; return; }
+    [[ $tun_name =~ ^[A-Za-z0-9_-]{1,15}$ ]] || { echo 'Invalid interface name.'; rm -f -- "$temporary"; return 1; }
     local default_ip=10.77.0.1 default_peer=10.77.0.2
     if [[ $role == client ]]; then default_ip=10.77.0.2; default_peer=10.77.0.1; fi
     ask 'Local tunnel IP (no prefix)' "$default_ip"; tun_ip=$REPLY
     ask 'Remote tunnel IP (no prefix)' "$default_peer"; tun_peer=$REPLY
-    [[ $tun_ip =~ ^[0-9a-fA-F.:]+$ && $tun_peer =~ ^[0-9a-fA-F.:]+$ ]] || { echo 'Use literal IP addresses.'; rm -f -- "$temporary"; return; }
+    [[ $tun_ip =~ ^[0-9a-fA-F.:]+$ && $tun_peer =~ ^[0-9a-fA-F.:]+$ ]] || { echo 'Use literal IP addresses.'; rm -f -- "$temporary"; return 1; }
     ask 'TUN MTU' 1400; mtu=$REPLY
-    [[ $mtu =~ ^[0-9]+$ ]] || { echo 'MTU must be numeric.'; rm -f -- "$temporary"; return; }
+    [[ $mtu =~ ^[0-9]+$ ]] || { echo 'MTU must be numeric.'; rm -f -- "$temporary"; return 1; }
     if [[ $forwarding == tun+ports ]]; then
       ask 'Shared inner TUN forwarding port (both peers use the same port)' 47475; forward_port=$REPLY
-      [[ $forward_port =~ ^[0-9]{1,5}$ ]] || { echo 'Forwarding port must be 1024..65535.'; rm -f -- "$temporary"; return; }
+      [[ $forward_port =~ ^[0-9]{1,5}$ ]] || { echo 'Forwarding port must be 1024..65535.'; rm -f -- "$temporary"; return 1; }
       forward_port=$((10#$forward_port))
-      (( forward_port >= 1024 && forward_port <= 65535 )) || { echo 'Forwarding port must be 1024..65535.'; rm -f -- "$temporary"; return; }
+      (( forward_port >= 1024 && forward_port <= 65535 )) || { echo 'Forwarding port must be 1024..65535.'; rm -f -- "$temporary"; return 1; }
       echo 'Mappings and SOCKS use authenticated TCP over the TUN peer route. Both peers must configure tun+ports with the same inner port.'
     fi
     echo 'TUN manages only its local interface and peer route. Additional forwarding/NAT must be configured explicitly.'
   fi
-  carrier_address_prompt || { rm -f -- "$temporary"; return; }; carrier=$address
+  carrier_address_prompt; carrier=$address
   if [[ $forwarding != tun && $role == server ]]; then
     if [[ $reverse == true && $forwarding == ports ]]; then
       ask 'Outbound edge connection pool size' 1; pool=$REPLY
-      [[ $pool =~ ^[0-9]+$ ]] || { echo 'Pool size must be a number.'; rm -f -- "$temporary"; return; }
+      [[ $pool =~ ^[0-9]+$ ]] || { echo 'Pool size must be a number.'; rm -f -- "$temporary"; return 1; }
       pool=$((10#$pool))
     fi
     ask 'Forwarding type (tcp/udp/socks5)' tcp; kind=$REPLY
     case $kind in
       tcp|udp)
-        address_prompt 'Public/local forwarded bind address' '127.0.0.1:18080' || { rm -f -- "$temporary"; return; }; bind=$address
-        address_prompt 'Target address on client machine' '127.0.0.1:8080' || { rm -f -- "$temporary"; return; }; target=$address
+        echo '0.0.0.0 exposes this forwarded port on the server; 127.0.0.1 makes it local-only.'
+        address_prompt 'Forwarded bind address' '0.0.0.0:18080'; bind=$address
+        echo 'Use the actual service port on the client, e.g. 127.0.0.1:443. The tunnel does not create that service.'
+        address_prompt 'Target address on client machine (required)' ''; target=$address
         ;;
       socks5)
-        address_prompt 'SOCKS5 listen address (no password; keep loopback unless intentionally exposing)' '127.0.0.1:1080' || { rm -f -- "$temporary"; return; }
+        address_prompt 'SOCKS5 listen address (no password; keep loopback unless intentionally exposing)' '127.0.0.1:1080' || { rm -f -- "$temporary"; return 1; }
         bind=$address
         ;;
-      *) echo 'Choose tcp, udp, or socks5.'; rm -f -- "$temporary"; return ;;
+      *) echo 'Choose tcp, udp, or socks5.'; rm -f -- "$temporary"; return 1 ;;
     esac
   elif [[ $forwarding != tun ]]; then
-    ask 'Allowed local target host:port (or explicit * for unrestricted SOCKS destinations)' '127.0.0.1:8080'; target=$REPLY
-    [[ $target == '*' || $target =~ $endpoint_pattern ]] || { echo 'Invalid target.'; rm -f -- "$temporary"; return; }
+    echo 'This must match the server target exactly. Use * only for unrestricted SOCKS destinations.'
+    ask 'Allowed local target host:port (required)' ''; target=$REPLY
+    [[ $target == '*' || $target =~ $endpoint_pattern ]] || { echo 'Invalid target.'; rm -f -- "$temporary"; return 1; }
     if [[ $forwarding == tun+ports ]]; then echo 'One packet tunnel carries the authenticated inner forwarding connection.'
     elif [[ $reverse == true ]]; then echo 'One origin listener accepts the dialing server connection pool.'
     elif [[ $transport == quantum || $transport == quantum-gaming ]]; then echo 'One raw connection is used for this configured peer.'
     else ask 'Connection pool size' 1; pool=$REPLY; fi
-    [[ $pool =~ ^[0-9]+$ ]] || { echo 'Pool size must be a number.'; rm -f -- "$temporary"; return; }
+    [[ $pool =~ ^[0-9]+$ ]] || { echo 'Pool size must be a number.'; rm -f -- "$temporary"; return 1; }
     pool=$((10#$pool))
   fi
   python3 - "$temporary" "$role" "$peer_key" "$carrier" "$extra" "$reverse" "$forwarding" \
@@ -322,18 +378,26 @@ PY
       done
     fi
     echo "Saved $file. Edit JSON to add more mappings, listeners, or paths."
+    trap - EXIT
+    python3 "$script_dir/diagnose.py" "$file" --summary-only
   else
     rm -f -- "$temporary"
     echo 'Configuration was rejected; existing config preserved.'
+    return 1
   fi
 }
 systemctl_cmd() { if (( EUID == 0 )); then systemctl "$@"; else systemctl --user "$@"; fi; }
+service_unit_dir() {
+  if (( EUID == 0 )); then echo /etc/systemd/system
+  else echo "${XDG_CONFIG_HOME:-$HOME/.config}/systemd/user"; fi
+}
 install_service() {
-  command -v systemctl >/dev/null || { echo 'systemd is not available.'; return; }
-  role_prompt || return
+  command -v systemctl >/dev/null || { echo 'systemd is not available. Use foreground mode in the advanced menu.'; return 1; }
+  role_prompt "${1:-}"
   local file=$config_dir/$role.json
   "$binary" -c "$file" --check || return
   local units user_line capabilities='' families='AF_INET AF_INET6 AF_UNIX' has_tun has_raw has_privileged caps=''
+  units=$(service_unit_dir)
   has_tun=$(python3 -c 'import json,sys; print(int(json.load(open(sys.argv[1])).get("tun") is not None))' "$file")
   has_raw=$(python3 -c 'import json,sys; c=json.load(open(sys.argv[1])); print(int(any(e.get("raw") is not None for e in c.get("listeners",[])+c.get("paths",[]))))' "$file")
   has_privileged=$(python3 - "$file" <<'PY'
@@ -368,7 +432,6 @@ PY
   fi
   if [[ -n $caps ]]; then printf -v capabilities 'AmbientCapabilities=%s\nCapabilityBoundingSet=%s' "$caps" "$caps"; fi
   if (( EUID == 0 )); then
-    units=/etc/systemd/system
     if ! id dagger-rs >/dev/null 2>&1; then useradd --system --no-create-home --home-dir "$config_dir" --shell /usr/sbin/nologin dagger-rs; fi
     chown dagger-rs:dagger-rs -- "$config_dir" "$file"
     if [[ -d $config_dir/$role-keys ]]; then
@@ -386,7 +449,6 @@ PY
     user_line='User=dagger-rs'
     runuser -u dagger-rs -- "$binary" -c "$file" --check || { echo 'Service user cannot read a required config/key/certificate file.'; return 1; }
   else
-    units=${XDG_CONFIG_HOME:-$HOME/.config}/systemd/user
     user_line=''
   fi
   mkdir -p -- "$units"
@@ -400,6 +462,7 @@ Wants=network-online.target
 Type=simple
 $user_line
 ExecStart="$binary" --config "$file"
+Environment=RUST_LOG=info,dagger_rs=debug
 Restart=on-failure
 RestartSec=3
 TimeoutStopSec=10
@@ -416,15 +479,33 @@ WantedBy=$(if (( EUID == 0 )); then echo multi-user.target; else echo default.ta
 UNIT
   chmod 644 "$units/dagger-rs-$role.service"
   systemctl_cmd daemon-reload
-  systemctl_cmd enable --now "dagger-rs-$role.service"
-  echo "Enabled dagger-rs-$role.service."
+  systemctl_cmd enable "dagger-rs-$role.service"
+  # enable --now does not reload an already running process after config edits.
+  systemctl_cmd restart "dagger-rs-$role.service"
+  sleep 1
+  if ! systemctl_cmd is-active --quiet "dagger-rs-$role.service"; then
+    echo 'The service failed to stay running. Recent errors:'
+    service_action logs "$role"
+    return 1
+  fi
+  echo "Service running: dagger-rs-$role.service (enabled at boot)."
+  echo 'A running service alone does not prove the peer is connected or data is forwarding.'
+  echo 'Use Diagnostics / Recent Logs and test your forwarded service from the entry side.'
   if (( EUID != 0 )); then echo 'User services stop at logout unless your administrator enables user lingering.'; fi
 }
 service_action() {
-  local action=$1; role_prompt || return
+  local action=$1; role_prompt "${2:-}"
   if [[ $action == logs ]]; then
     if (( EUID == 0 )); then journalctl -u "dagger-rs-$role.service" -n 50 --no-pager; else journalctl --user -u "dagger-rs-$role.service" -n 50 --no-pager; fi
   else systemctl_cmd "$action" "dagger-rs-$role.service"; fi
+}
+diagnose_menu() {
+  role_prompt
+  local file=$config_dir/$role.json
+  "$binary" -c "$file" --check
+  python3 "$script_dir/diagnose.py" "$file"
+  systemctl_cmd --no-pager status "dagger-rs-$role.service" || true
+  service_action logs "$role"
 }
 linktest_menu() {
   ask 'Link test action (listen/probe)' probe; local action=$REPLY
@@ -458,19 +539,19 @@ while true; do
   printf '\nDagger Rust — local Linux setup\nConfig directory: %s\n' "$config_dir"
   printf 'Rust rewrite by ir_spoof: https://t.me/ir_spoof\n'
   printf '1) Generate/show local public key\n2) Configure server or client\n3) Validate configuration\n4) Run in foreground\n5) Install and start systemd service\n6) Service status\n7) Restart service\n8) Stop service\n9) Recent logs\n10) Generate local TLS certificate\n11) Test an explicit peer link\n0) Exit\n'
-  ask 'Choose' 0
+  if ! ask 'Choose' 0; then exit 0; fi
   case $REPLY in
-    1) if role_prompt; then ensure_keys; fi ;;
-    2) configure ;;
+    1) run_action key_menu ;;
+    2) run_action configure ;;
     3) if role_prompt; then "$binary" -c "$config_dir/$role.json" --check || true; fi ;;
     4) if role_prompt; then "$binary" -c "$config_dir/$role.json" || true; fi ;;
-    5) install_service || echo 'Service installation failed.' ;;
-    6) service_action status || true ;;
-    7) service_action restart || true ;;
-    8) service_action stop || true ;;
-    9) service_action logs || true ;;
-    10) certificate_menu || echo 'Certificate generation failed; existing files were preserved.' ;;
-    11) linktest_menu || echo 'Link test reported a failure.' ;;
+    5) run_action install_service ;;
+    6) run_action service_action status ;;
+    7) run_action service_action restart ;;
+    8) run_action service_action stop ;;
+    9) run_action service_action logs ;;
+    10) run_action certificate_menu ;;
+    11) run_action linktest_menu ;;
     0) exit 0 ;;
     *) echo 'Choose a listed option.' ;;
   esac
