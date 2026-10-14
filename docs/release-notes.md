@@ -1,3 +1,10 @@
+## English menu with endpoint labels
+
+- Short English prompts with [IRAN], [ABROAD], [KEY], [TUNNEL], [USER] and [SAVE] markers.
+- Keep separate IP/port inputs, examples, validation and review before saving.
+- Client explicitly means the abroad server; user means the phone/VPN app.
+- Menu wording only; tunnel behavior and configuration format unchanged.
+
 ## Guided Iran / abroad setup
 
 - Persian simple setup for Iran and abroad, with explicit host ownership and examples.

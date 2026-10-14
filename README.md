@@ -131,8 +131,8 @@ Dependency and runtime attribution is preserved in [third-party notices](docs/th
 
 ## Guided Iran / abroad setup
 
-The classic entry point now uses a Persian guided port-forwarding wizard for options
-1 (Iran) and 2 (abroad). Each host and port is asked separately, with endpoint labels,
+The classic entry point now uses an English guided port-forwarding wizard for options
+1 (Iran) and 2 (abroad). Each host and port is asked separately, with [IRAN], [ABROAD], [KEY] and [TUNNEL] labels,
 examples, Persian-digit port normalization, peer-key guidance and a confirmation
 summary before saving. `127.0.0.1` in the service target always means the abroad
 machine. `q` cancels without replacing the previous configuration. TCP, Quantum+

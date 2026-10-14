@@ -23,7 +23,7 @@ curl -fL https://raw.githubusercontent.com/V2grop/dagger-connect-rs/main/scripts
 sudo /usr/local/bin/dagger-setup
 ```
 
-برای راه‌اندازی ساده از منوی فارسی استفاده کنید:
+برای راه‌اندازی ساده از منوی سادهٔ انگلیسی استفاده کنید:
 
 ```sh
 sudo /usr/local/bin/dagger-setup-classic
@@ -145,3 +145,10 @@ Quantum+/KCP. پروتکل ورودی کاربران همان TCP/UDP انتخا
 باینری **dagger-rs 0.2.1** دارد. کد Rust، وابستگی‌ها و پروتکل این نسخه با آن سورس
 یکسان‌اند؛ اصلاح حاضر مربوط به نصب و منو است. جزئیات مقایسه و تست عبور واقعی
 داده در [گزارش اصلاح راه‌اندازی](docs/setup-repair.md) آمده است.
+
+### برچسب‌های انگلیسی منو
+
+منو انگلیسی است. `[IRAN] Server IP` آی‌پی ایران، `[IRAN] Tunnel Port` پورت تونل ایران،
+`[IRAN] User Port` پورت اتصال کاربران، `[ABROAD] Service IP` آدرس سرویس از دید خارج و
+`[ABROAD] Service Port` پورت اینباند خارج است. `Client` در منو یعنی سرور خارج، نه گوشی.
+`[KEY]` کلید عمومی، `[CHECK]` بازبینی/عیب‌یابی و `[SAVE]` ذخیره را مشخص می‌کنند.

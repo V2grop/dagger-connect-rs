@@ -106,9 +106,9 @@ key_menu() {
   role_prompt
   ensure_keys
   if [[ ${DAGGER_MENU_STYLE:-} == classic ]]; then
-    if [[ $role == server ]]; then echo 'این کلید عمومی ایران است؛ در گزینهٔ 2 سرور خارج وارد کنید.'
-    else echo 'این کلید عمومی خارج است؛ در گزینهٔ 1 سرور ایران وارد کنید.'; fi
-    echo 'فقط رشتهٔ Public key را کپی کنید؛ کلید خصوصی روی همین سرور می‌ماند.'
+    if [[ $role == server ]]; then echo '[KEY] IRAN Public Key: paste on ABROAD, menu 2.'
+    else echo '[KEY] ABROAD Public Key: paste on IRAN, menu 1.'; fi
+    echo '[KEY] Copy only the Public Key. Keep the Private Key on this server.'
   fi
 }
 certificate_menu() {
@@ -277,7 +277,7 @@ configure() {
   local guided=${2:-advanced}
   role_prompt "${1:-}"
   if [[ $guided == guided ]]; then
-    echo "راهنما: Enter = مقدار داخل کروشه؛ q = لغو. فقط همین سرور تغییر می‌کند."
+    echo "[i] Enter = default shown in brackets. q = Cancel. This setup changes THIS server only."
     guide_keys
   else
     ensure_keys
@@ -286,7 +286,7 @@ configure() {
   fi
   local file=$config_dir/$role.json temporary cleanup
   if [[ -e $file ]]; then
-    yes_no "جایگزینی تنظیم قبلی همین سرور؟ / Replace existing $file?" no
+    yes_no "[SAVE] Replace THIS server config ($file)?" no
     [[ $REPLY == yes ]] || return 10
   fi
   if [[ $guided == guided ]]; then guide_transport; else transport_prompt; fi
